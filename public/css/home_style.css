@@ -1,0 +1,194 @@
+/* 基本設定とフォント */
+:root {
+    --color-food: #FCE1B3;
+    --color-shop: #D4F4DD;
+    --color-event: #C3E6F5;
+    --border-color: #E0E0E0;
+    --text-dark: #333;
+    --text-light: #888;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', 'Helvetica Neue', sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+/* スマホ画面のコンテナ */
+.mobile-container {
+    width: 390px;
+    height: 844px; /* iPhone 12 Pro size */
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* 中身がはみ出ないように */
+    position: relative;
+}
+
+/* ヘッダー */
+.header {
+    padding: 15px 0;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: transparent;
+    background: linear-gradient(90deg, #6DD5FA, #FFC371, #FF5F6D);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+/* メインコンテンツエリア */
+.main-content {
+    flex-grow: 1; /* 残りの高さをすべて使う */
+    overflow-y: auto; /* スクロール可能にする */
+    padding: 0 15px;
+}
+
+/* 検索バー */
+.search-container {
+    margin-top: 15px;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    position: relative;
+}
+
+.search-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--text-light);
+}
+
+/* フィルターボタン */
+.filter-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.filter-btn.food { background-color: var(--color-food); }
+.filter-btn.shop { background-color: var(--color-shop); }
+.filter-btn.event { background-color: var(--color-event); }
+
+.dropdown-arrow {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid var(--text-dark);
+    margin-left: auto; /* 右寄せにする */
+}
+
+/* 投稿カード */
+.post-card {
+    margin-bottom: 20px;
+}
+
+.post-header {
+    margin-bottom: 10px;
+}
+
+.post-author {
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--text-dark);
+}
+
+.post-image-container img {
+    width: 100%;
+    border-radius: 10px;
+    aspect-ratio: 1 / 1.2; /* 縦長の比率 */
+    object-fit: cover;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5px;
+}
+
+.actions-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon, .icon-heart {
+    cursor: pointer;
+    color: var(--text-dark);
+}
+
+/* 投稿コンテンツ */
+.post-content {
+    padding: 0 5px;
+}
+
+.tag {
+    display: inline-block;
+    border: 1px solid var(--text-light);
+    color: var(--text-light);
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.caption {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-dark);
+}
+
+
+/* フッターナビゲーション */
+.footer-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid var(--border-color);
+    background-color: #ffffff;
+}
+
+.nav-item {
+    color: var(--text-dark);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-item-add {
+    background-color: var(--text-dark);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+}
