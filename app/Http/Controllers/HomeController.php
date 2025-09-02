@@ -1,22 +1,28 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Event;
-use App\Models\Post;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        $category = $request->get('category');
+        $this->middleware('auth');
+    }
 
-        $posts = Post::query()
-            ->when($category,fn($q)=>$q->where('category',$category))
-            ->latest()
-            ->get();
-
-        $events = Event::latest()->take(5)->get();
-        return view('home', compact('posts', 'events', 'category'));
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('home');
     }
 }
