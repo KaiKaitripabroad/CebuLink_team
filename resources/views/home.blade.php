@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.home_style')
 
 @section('content')
     <div class="search-container">
