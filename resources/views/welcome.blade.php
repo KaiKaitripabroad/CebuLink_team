@@ -28,7 +28,7 @@
                 <a href="{{ route('register') }}" class="button signup-button">sign up</a>
             </div>
             <div class="guest-button-container">
-                <a href="{{ url('/home') }}" class="button guest-button">guest</a>
+                <a href="{{ route('guest.index') }}" class="button guest-button">guest</a>
             </div>
         </div>
     </div>

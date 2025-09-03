@@ -17,8 +17,11 @@ use App\Http\Controllers\HomeController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/posts', [App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
+// ...existing code...
+Route::get('/guest', [App\Http\Controllers\GuestController::class, 'index'])->name('guest.index');
