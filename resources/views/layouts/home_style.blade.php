@@ -38,7 +38,7 @@
                     <line x1="3" y1="10" x2="21" y2="10"></line>
                 </svg>
             </a>
-            <a href="#" class="nav-item nav-item-add">
+            <a href="{{ route('posts.index') }}" class="nav-item nav-item-add">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                     fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="12" y1="5" x2="12" y2="19"></line>
