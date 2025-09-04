@@ -10,4 +10,16 @@ class PostController extends Controller
     {
         return view('posts.index');
     }
+    public function create()
+    {
+        return view('posts.create');
+    }
+    public function edit($id)
+    {
+        return view('posts.edit', ['id' => $id]);
+    }
+    public function show($id)
+    {
+        return view('posts.show', ['id' => $id]);
+    }
 }
