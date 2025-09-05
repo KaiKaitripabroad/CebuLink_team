@@ -1,0 +1,80 @@
+/* ハンバーガーメニュー */
+.menu-toggle {
+    font-size: 28px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #333;
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 6px rgba(0,0,0,0.2);
+    transition: right 0.3s ease;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.menu.active {
+    right: 0;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    margin: 20px 0;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+}
+
+.header {
+    display: flex; /* Flexboxを有効にする */
+    justify-content: space-between; /* 子要素を両端に配置する */
+    align-items: center; /* 子要素を垂直方向の中央に揃える */
+}
+
+.profile-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+
+
+.profile-icon img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-info .username {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.profile-info .name {
+    color: #666;
+    margin: 0;
+}
+
+.profile-bio p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 0.9em;
+}

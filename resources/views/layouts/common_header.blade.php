@@ -14,18 +14,20 @@
 </head>
 
 <body>
-    <div class="mobile-container">
-        <header class="header">
-            <h1 class="logo">CebuLink+</h1>
-        </header>
 
+    <div class="mobile-container">
+        <header class="profile-header">
+
+            <div style="display:flex; justify-content: space-between; " class="profile-right">
+                <h1 class="logo">CebuLink+</h1>
+                <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+            </div>
+        </header>
         <main class="main-content">
             @yield('content')
         </main>
 
         @include('layouts.footer')
-
-    </div>
-</body>
 
 </html>
