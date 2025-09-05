@@ -1,4 +1,4 @@
-@extends('layouts.home_style')
+@extends('layouts.guest_style')
 
 @section('content')
     <div class="search-container">
