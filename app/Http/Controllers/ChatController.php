@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 
-class GuestController extends Controller
+class ChatController extends Controller
 {
     public function index()
     {
-        return view('guest.index',);
-
+        return view('chat.index');
     }
 }
