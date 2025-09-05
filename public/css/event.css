@@ -1,73 +1,94 @@
-/* public/css/event.css */
-body {
-    font-family: "Helvetica", sans-serif;
-    background-color: #fff;
-    padding: 20px;
+/* 全体の余白とフォント */
+main {
+    font-family: "Helvetica", "Arial", sans-serif;
+    padding: 15px;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
-.event-image {
+/* 画像 */
+.image-area img {
     width: 100%;
-    border-radius: 10px;
-    margin-bottom: 20px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
 }
 
-.event-title {
-    font-size: 24px;
+/* ラベルと入力フォーム */
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 2px;
 }
 
-.event-description {
-    font-size: 16px;
-    margin-bottom: 20px;
-}
-
-.event-info {
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    border: none;
+    background: transparent;
     font-size: 14px;
-    margin-bottom: 10px;
-    color: #555;
+    resize: none;
+    outline: none;
+}
+
+/* タグセクション */
+.tag-section {
+    margin: 15px 0;
 }
 
 .tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 8px;
 }
 
 .tag {
-    padding: 6px 10px;
-    border-radius: 20px;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 15px;
     font-size: 13px;
-    color: white;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
 }
 
-.tag.food {
-    background-color: #f9c74f;
-}
-.tag.shop {
-    background-color: #90be6d;
-}
-.tag.event {
-    background-color: #e63946;
-}
-.tag.volunteer {
-    background-color: #f8961e;
-}
-.tag.sightseeing {
-    background-color: #457b9d;
-}
-.tag.others {
-    background-color: #9d4edd;
-}
+/* タグの色 */
+.tag.yellow {
+    background-color: #ffd966;
+} /* food */
+.tag.orange {
+    background-color: #f6b26b;
+} /* shop */
+.tag.purple {
+    background-color: #8e7cc3;
+    color: #fff;
+} /* event */
+.tag.green {
+    background-color: #93c47d;
+} /* volunteer */
+.tag.pink {
+    background-color: #e06666;
+    color: #fff;
+} /* sightseeing */
+.tag.blue {
+    background-color: #6fa8dc;
+    color: #fff;
+} /* others */
 
-.navbar {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: white;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-    border-top: 1px solid #ccc;
+/* シェアボタン */
+.share-button {
+    display: block;
+    width: 60%;
+    margin: 20px auto;
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
 }
