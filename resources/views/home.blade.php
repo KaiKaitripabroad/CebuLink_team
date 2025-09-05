@@ -47,7 +47,7 @@
         <div class="post-content">
             <span class="tag">sightseeing</span>
             <p class="caption">
-                10000 rosesに行ってきた！<br>
+                10000 rosesに行ってきた!<br>
                 夕焼け＆バラが綺麗なので是非！
             </p>
         </div>
