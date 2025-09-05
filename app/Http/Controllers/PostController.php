@@ -22,4 +22,8 @@ class PostController extends Controller
     {
         return view('posts.show', ['id' => $id]);
     }
+    public function post_event()
+    {
+        return view('posts.post_event');
+    }
 }

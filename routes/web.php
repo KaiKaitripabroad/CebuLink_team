@@ -32,6 +32,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('chat');
 });
 Route::get('/posts', [App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
+Route::get('/posts/post_event', [App\Http\Controllers\PostController::class, 'post_event'])->name('posts.post_event');
 Route::get('/posts/create', [App\Http\Controllers\PostController::class, 'create'])->name('posts.create');
 Route::get('/posts/{id}/edit', [App\Http\Controllers\PostController::class, 'edit'])->name('posts.edit');
 Route::get('/posts/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');

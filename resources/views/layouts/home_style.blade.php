@@ -11,17 +11,18 @@
     <link href="https://fonts.googleapis.com/css2?a=Poppins:wght@400;600&family=M+PLUS+Rounded+1c:wght@700&display=swap"
         rel="stylesheet">
     @yield('styles')
+    @yield('css')
 </head>
 
 <body>
-    <div class="mobile-container">
-        <header class="header">
-            <h1 class="logo">CebuLink+</h1>
-        </header>
+<div class="mobile-container">
+    <header class="header">
+        <h1 class="logo">CebuLink+</h1>
+    </header>
 
-        <main class="main-content">
-            @yield('content')
-        </main>
+    <main class="main-content">
+        @yield('content')
+    </main>
 
         @include('layouts.footer')
 
