@@ -1,10 +1,6 @@
 @extends('layouts.common_header')
 
 @section('content')
-    {{-- <header class="header"> --}}
-    {{-- <h1 class="logo">CebuLink+</h1> --}}
-    {{-- <button class="menu-toggle" onclick="toggleMenu()">☰</button> --}}
-    {{-- </header> --}}
     <div id="menu" class="menu">
         <ul>
             <li><a href="{{ route('home') }}">設定</a></li>
@@ -71,4 +67,5 @@
             </div>
         </div>
     </div>
+    <script src="{{asset('js/profile.js')}}"></script>
 @endsection
