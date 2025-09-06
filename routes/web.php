@@ -25,7 +25,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/gest',[App\Http\Controllers\GestController::class,'index'])->name('gest');
 Route::get('/events', [App\Http\Controllers\EventController::class, 'index'])->name('events.index');
 Route::middleware(['auth'])->group(function () {
     Route::get('/chat', [\Chatify\Http\Controllers\MessagesController::class, 'index'])
