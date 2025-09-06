@@ -92,3 +92,22 @@ main {
     font-size: 14px;
     cursor: pointer;
 }
+
+.share-button,
+.back-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.back-button {
+    margin-top: 40px;
+    background-color: #555; /* グレー系で「戻る」感を出す */
+}
