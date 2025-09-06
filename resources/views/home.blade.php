@@ -21,7 +21,7 @@
             <p class="post-author">@fukushi</p>
         </div>
         <div class="post-image-container">
-            <img src="https://images.unsplash.com/photo-1548291683-058b2e2a6d5f?q=80&w=1887&auto=format&fit=crop"
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500"
                 alt="10000 roses">
         </div>
         <div class="post-actions">
