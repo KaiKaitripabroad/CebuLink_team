@@ -11,9 +11,9 @@
     position: fixed;
     top: 0;
     right: -250px;
-    width: 250px;
+    width: 200px;
     height: 100%;
-    background: #fff;
+    background: #ffffffe8;
     box-shadow: -2px 0 6px rgba(0,0,0,0.2);
     transition: right 0.3s ease;
     padding: 20px;
@@ -45,6 +45,12 @@
     align-items: center; /* 子要素を垂直方向の中央に揃える */
 }
 
+.profile-header {
+    margin: 13px;
+    align-items: center;
+    gap:45px;
+}
+
 .profile-container {
     padding: 20px;
     display: flex;
@@ -53,7 +59,11 @@
     text-align: center;
 }
 
-
+.wakusen {
+    border: 1px solid #000000; /* 青色の線 */
+    width: 100%;
+    margin-bottom: 20px;
+}
 
 .profile-icon img {
     width: 80px;

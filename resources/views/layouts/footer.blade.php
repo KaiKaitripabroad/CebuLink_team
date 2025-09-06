@@ -1,5 +1,5 @@
         <footer class="footer-nav">
-            <a href="{{ route('guest.index') }}" class="nav-item">
+            <a href="{{ route('home') }}" class="nav-item">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>

@@ -42,8 +42,7 @@ body {
 }
 
 .logo {
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-    font-size: 28px;
+    font-family: 'Pacifico', cursive;
     font-weight: 700;
     color: transparent;
     background: linear-gradient(90deg, #6DD5FA, #FFC371, #FF5F6D);
