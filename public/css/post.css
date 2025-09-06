@@ -1,6 +1,6 @@
 /* 全体レイアウト */
 main {
-    font-family: 'Poppins', 'M PLUS Rounded 1c', sans-serif;
+    font-family: "Poppins", "M PLUS Rounded 1c", sans-serif;
     background-color: #ffffff;
     padding: 16px;
     max-width: 480px;
@@ -86,12 +86,24 @@ main {
 }
 
 /* タグ色 */
-.tag.yellow { background-color: #f6c344; }
-.tag.orange { background-color: #f28b2f; }
-.tag.purple { background-color: #9b59b6; }
-.tag.green { background-color: #27ae60; }
-.tag.pink { background-color: #e67e9f; }
-.tag.blue { background-color: #3498db; }
+.tag.yellow {
+    background-color: #f6c344;
+}
+.tag.orange {
+    background-color: #f28b2f;
+}
+.tag.purple {
+    background-color: #9b59b6;
+}
+.tag.green {
+    background-color: #27ae60;
+}
+.tag.pink {
+    background-color: #e67e9f;
+}
+.tag.blue {
+    background-color: #3498db;
+}
 
 /* シェアボタン */
 .share-button {
@@ -111,4 +123,24 @@ main {
 
 .share-button:hover {
     background-color: #333;
+}
+
+.share-button,
+.back-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    font-size: 16px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.back-button {
+    margin-top: 40px;
+    background-color: #555; /* 少し色を変えてもOK */
 }

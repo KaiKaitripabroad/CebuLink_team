@@ -33,5 +33,6 @@
     </div>
 
     <button class="share-button">share</button>
+    <button class="back-button" onclick="history.back()">戻る</button>
 </main>
 @endsection
