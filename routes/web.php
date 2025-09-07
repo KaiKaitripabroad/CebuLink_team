@@ -42,5 +42,4 @@ Route::get('/events/guest', [App\Http\Controllers\EventController::class, 'index
 
 Route::get('/mypage', [UserController::class, 'mypage'])->name('users.mypage');
 
-
-
+Route::patch('/profile/update', [UserController::class, 'update'])->name('profile.update');
