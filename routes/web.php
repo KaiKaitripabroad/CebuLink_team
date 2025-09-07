@@ -42,4 +42,4 @@ Route::get('/events/guest', [App\Http\Controllers\EventController::class, 'index
 
 Route::get('/mypage', [UserController::class, 'mypage'])->name('users.mypage');
 
-Route::post('/profile/update-bio', [UserController::class, 'updateBio'])->name('profile.update.bio');
+Route::patch('/profile/update', [UserController::class, 'update'])->name('profile.update');

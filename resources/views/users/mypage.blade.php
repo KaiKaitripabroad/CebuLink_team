@@ -25,36 +25,50 @@
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
     <div class="profile-container">
         <div class="wakusen">
-            
-            {{-- プロフィールヘッダー --}}
-            <div class="profile-header" style="display: flex; jastify-content:space-between; align-items: center;">
-                <div class="profile-icon">
-                    {{-- 実際にはユーザーのアイコン画像へのパスを指定します --}}
-                    @if (isset($profile) && $profile->profile_image_url)
-                        <img id="profileImage" src="{{ $profile->profile_image_url }}" alt="Profile Icon">
-                    @else
-                        <img id="profileImage" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500"
-                            alt="Profile Icon">
-                    @endif
-                    <input type="file" id="profileInput" name="profile_image" accept="image/*" style="display:none;">
-                </div>
-                <div class="profile-info">
-                    <p class="username">@@{{ $user - > name }}</p>
-                    <p class="name">{{ $user->name }}</p>
-                </div>
-            </div>
+            <form id="profileForm" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PATCH')
+                {{-- プロフィールヘッダー --}}
+                <div class="profile-header" style="display: flex; jastify-content:space-between; align-items: center;">
+                    <div class="profile-icon">
+                        {{-- 実際にはユーザーのアイコン画像へのパスを指定します --}}
+                        @if (isset($profile) && $profile->profile_image_url)
+                            <img id="profileImage" src="{{ $profile->profile_image_url }}" alt="Profile Icon">
+                        @else
+                            <img id="profileImage" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500"
+                                alt="Profile Icon">
+                        @endif
+                        <input type="file" id="profileInput" name="profile_image" accept="image/*" style="display:none;">
+                    </div>
+                    <div class="profile-info">
+                        {{-- 表示用のpタグ --}}
+                        <p class="username editable-text" data-target="username-input">{{ $user->username ?? $user->name }}</p>
+                        {{-- 編集・送信用で非表示のinputタグ --}}
+                        <input type="text" name="username" value="{{ $user->username ?? $user->name }}" id="username-input"
+                            style="display: none;">
 
-            {{-- 自己紹介 --}}
-            <div class="profile-bio">
-                @if ($profile)
-                    <p>{!! nl2br(e($profile->bio)) !!}</p>
-                    <textarea id="bio-textarea" class="bio-textarea" style="display: none;">{{ $profile->bio }}</textarea>
-                @else
-                    <p>自己紹介を記載しよう！！</p>
-                    <textarea id="bio-textarea" class="bio-textarea" style="display: none;"></textarea>
-                @endif
-            </div>
-            <button type="submit">保存する</button>
+                        {{-- 表示用のpタグ --}}
+                        <p class="name editable-text" data-target="name-input">{{ $user->name }}</p>
+                        {{-- 編集・送信用で非表示のinputタグ --}}
+                        <input type="text" name="name" value="{{ $user->name }}" id="name-input"
+                            style="display: none;">
+                    </div>
+                </div>
+
+                <div class="profile-bio">
+                    {{-- 表示用のpタグ --}}
+                    <p class="editable-text" data-target="bio-textarea">
+                        @if ($profile && $profile->bio)
+                            {!! nl2br(e($profile->bio)) !!}
+                        @else
+                            自己紹介を記載しよう！！
+                        @endif
+                    </p>
+                    {{-- 編集・送信用で非表示のtextarea --}}
+                    <textarea name="bio" id="bio-textarea" class="bio-textarea" style="display: none;">{{ optional($profile)->bio }}</textarea>
+                </div>
+                <button type="submit">保存する</button>
+            </form>
         </div>
 
         {{-- 投稿グリッド --}}
