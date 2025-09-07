@@ -25,23 +25,36 @@
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
     <div class="profile-container">
         <div class="wakusen">
+            
             {{-- プロフィールヘッダー --}}
             <div class="profile-header" style="display: flex; jastify-content:space-between; align-items: center;">
                 <div class="profile-icon">
                     {{-- 実際にはユーザーのアイコン画像へのパスを指定します --}}
-                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500" alt="Profile Icon">
+                    @if (isset($profile) && $profile->profile_image_url)
+                        <img id="profileImage" src="{{ $profile->profile_image_url }}" alt="Profile Icon">
+                    @else
+                        <img id="profileImage" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500"
+                            alt="Profile Icon">
+                    @endif
+                    <input type="file" id="profileInput" name="profile_image" accept="image/*" style="display:none;">
                 </div>
                 <div class="profile-info">
-                    <p class="username">@coco.121</p>
-                    <p class="name">こころ/cocoro</p>
+                    <p class="username">@@{{ $user - > name }}</p>
+                    <p class="name">{{ $user->name }}</p>
                 </div>
             </div>
 
             {{-- 自己紹介 --}}
             <div class="profile-bio">
-                <p>1999 Japan Cebu</p>
-                <p>プログラミング英語勉強中</p>
+                @if ($profile)
+                    <p>{!! nl2br(e($profile->bio)) !!}</p>
+                    <textarea id="bio-textarea" class="bio-textarea" style="display: none;">{{ $profile->bio }}</textarea>
+                @else
+                    <p>自己紹介を記載しよう！！</p>
+                    <textarea id="bio-textarea" class="bio-textarea" style="display: none;"></textarea>
+                @endif
             </div>
+            <button type="submit">保存する</button>
         </div>
 
         {{-- 投稿グリッド --}}
@@ -67,5 +80,5 @@
             </div>
         </div>
     </div>
-    <script src="{{asset('js/profile.js')}}"></script>
+    <script src="{{ asset('js/profile.js') }}"></script>
 @endsection
