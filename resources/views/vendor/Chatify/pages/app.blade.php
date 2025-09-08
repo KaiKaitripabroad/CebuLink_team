@@ -2,12 +2,11 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 
-@php($v = request('v', 'split')) {{-- list / chat / info --}}
-<div class="chatify-shell {{ $v }}">
+@php($v = request('v', 'chat')) {{-- list / chat / info --}}
+<div class="chatify-shell {{ in_array($v, ['list','chat','info']) ? $v : 'chat' }}">
     <nav class="chatify-tabs">
         <a class="{{ $v === 'list' ? 'active' : '' }}" href="{{ route('chat', ['v' => 'list']) }}">Messages</a>
         <a class="{{ $v === 'chat' ? 'active' : '' }}" href="{{ route('chat', ['v' => 'chat']) }}">Chat</a>
-
         <a class="{{ $v === 'info' ? 'active' : '' }}" href="{{ route('chat', ['v' => 'info']) }}">User</a>
     </nav>
 
@@ -15,7 +14,7 @@
 
     <div class="messenger">
         {{-- ----------------------Users/Groups lists side---------------------- --}}
-        <div class="messenger-listView {{ !!$id ? 'conversation-active' : '' }}">
+        <div class="messenger-listView {{ $id ? 'conversation-active' : '' }}">
             {{-- Header and search bar --}}
             <div class="m-header">
                 <nav>
