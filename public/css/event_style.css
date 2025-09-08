@@ -1,0 +1,50 @@
+
+
+
+/* 画像ギャラリー */
+.image-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.image-gallery img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.event-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.event-card {
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 10px;
+    gap: 15px;
+}
+
+.event-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.event-info h3 {
+    margin: 0 0 5px;
+    font-size: 16px;
+}
+
+.event-info p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
