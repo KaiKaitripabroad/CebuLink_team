@@ -1,0 +1,90 @@
+.chatify-tabs {
+    display: none;
+}
+.chatify-tabs a {
+    padding: 6px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+.chatify-tabs a.active {
+    font-weight: 600;
+    background: #f6f6f6;
+}
+
+.chatify-shell.list .messenger-listView {
+    width: 100%;
+    max-width: 100%;
+}
+.chatify-shell.list .messenger-messagingView,
+.chatify-shell.list .messenger-infoView {
+    display: none;
+}
+
+.chatify-shell.chat .messenger-messagingView {
+    width: 100%;
+    max-width: 100%;
+}
+.chatify-shell.chat .messenger-listView,
+.chatify-shell.chat .messenger-infoView {
+    display: none;
+}
+
+.chatify-shell.info .messenger-infoView {
+    width: 100%;
+    max-width: 100%;
+}
+.chatify-shell.info .messenger-listView,
+.chatify-shell.info .messenger-messagingView {
+    display: none;
+}
+
+.chatify-tabs {
+    position: relative;
+    z-index: 1;
+}
+
+.chatify-shell.split .messenger {
+    display: flex;
+}
+.chatify-shell.split .messenger-listView {
+    width: 340px;
+    min-width: 280px;
+    border-right: 1px solid #eee;
+    display: block;
+}
+.chatify-shell.split .messenger-messagingView {
+    flex: 1;
+    display: block;
+}
+.chatify-shell.split .messenger-infoView {
+    display: none;
+}
+
+.chatify-shell.split .m-header .show-infoSide {
+    display: none;
+}
+.chatify-shell.split .m-header .show-listView {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .chatify-shell.split .messenger {
+        display: block;
+    }
+
+    .chatify-shell.split .messenger-messagingView {
+        display: none;
+    }
+    .chatify-shell.split .messenger-listView.conversation-active {
+        display: none;
+    }
+    .chatify-shell.split
+        .messenger-listView.conversation-active
+        ~ .messenger-messagingView {
+        display: block;
+    }
+
+    .chatify-shell.split .messenger-infoView {
+        display: none;
+    }
+}
