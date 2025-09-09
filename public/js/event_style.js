@@ -1,5 +1,6 @@
 const dateList = document.getElementById("date-list");
 const today = new Date();
+const selectedDateElement = document.getElementById("selected-date"); // ← h1を取得
 
 // 最初に7日分を表示
 let currentIndex = 0;
@@ -32,6 +33,11 @@ function renderDates() {
                 .querySelectorAll(".date-item")
                 .forEach((el) => el.classList.remove("active"));
             span.classList.add("active");
+            // ここで h1 の内容を変更
+            selectedDateElement.textContent = date.toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+            });
             console.log("選択された日付:", date.toISOString().split("T")[0]);
         });
 

@@ -16,13 +16,13 @@
         </div>
         <div class="event-list">
             @for ($i = 0; $i <= 10; $i++)
-                <div class="event-card">
+                <a href="{{ route('events.detail') }}" class="event-card">
                     <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=500" class="event-image">
                     <div class="event-info">
                         <h3>aaa</h3>
                         <p>aa</p>
                     </div>
-                </div>
+                </a>
             @endfor
         </div>
     </section>

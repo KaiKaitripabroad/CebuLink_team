@@ -33,6 +33,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/chat', [\Chatify\Http\Controllers\MessagesController::class, 'index'])
         ->name('chat');
 });
+Route::get('/events/detail', [App\Http\Controllers\EventController::class, 'detail'])->name('events.detail');
+Route::get('/events/guest_detail', [App\Http\Controllers\EventController::class, 'detail_guest'])->name('events.detail_guest');
 Route::get('/posts', [App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
 Route::get('/posts/post_event', [App\Http\Controllers\PostController::class, 'post_event'])->name('posts.post_event');
 Route::get('/posts/create', [App\Http\Controllers\PostController::class, 'create'])->name('posts.create');

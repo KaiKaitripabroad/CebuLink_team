@@ -7,15 +7,15 @@
     padding: 15px;
     background: #fff;
     border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     max-width: 700px;
 }
 
 /* ナビゲーションボタン */
 .nav-btn {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
     border: none;
-    color: #fff;
+    color: #000000;
     font-size: 20px;
     cursor: pointer;
     padding: 8px 14px;
@@ -24,7 +24,7 @@
 }
 .nav-btn:hover {
     transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* 日付リスト（横スクロール） */
@@ -43,7 +43,7 @@
     flex: 0 0 auto;
     padding: 10px 15px;
     background: #f8f9fa;
-    border-radius: 12px;
+    border-radius: 5px;
     font-size: 16px;
     text-align: center;
     cursor: pointer;
@@ -51,22 +51,23 @@
     min-width: 80px;
 }
 .date-item:hover {
-    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-    color: #fff;
+    background:rgb(255, 255, 255);
+    color: #5f4949;
     transform: translateY(-3px);
 }
 
 /* 今日 or 選択中の日付 */
 .date-item.active {
-    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-    color: #fff;
+    background: white;
+    color: #000000;
     font-weight: bold;
-    box-shadow: 0 4px 15px rgba(56, 249, 215, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border-bottom: 2px solid #000; /* 例: 黒い枠線 */
 }
 .infrom {
-    display: flex;              /* 横並び */
-    align-items: center;        /* 縦方向を中央揃え */
-    gap: 20px;                  /* 要素間の余白 */
+    display: flex; /* 横並び */
+    align-items: center; /* 縦方向を中央揃え */
+    gap: 20px; /* 要素間の余白 */
     justify-content: center;
 }
 
@@ -76,7 +77,6 @@
     font-weight: bold;
     margin: 0;
 }
-
 
 /* 画像ギャラリー */
 .image-gallery {
@@ -97,31 +97,42 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    margin: 20px;
 }
 
 .event-card {
     display: flex;
+    text-decoration: none;    /* 下線を消す */
+    color: inherit;           /* 親要素の文字色を継承 */
     align-items: center;
     background-color: #f9f9f9;
     border-radius: 10px;
     padding: 10px;
     gap: 15px;
 }
+.event-card:hover {
+    background:white;
+    color: #000000;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+}
 
 .event-image {
-    width: 60px;
-    height: 60px;
+    width: 200px;
+    height: 200px;
     border-radius: 8px;
     object-fit: cover;
 }
 
 .event-info h3 {
     margin: 0 0 5px;
-    font-size: 16px;
+    font-size: 23px;
+
 }
 
 .event-info p {
     margin: 0;
-    font-size: 14px;
+    font-size: 18px;
     color: #666;
 }
