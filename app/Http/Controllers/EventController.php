@@ -16,4 +16,12 @@ class EventController extends Controller
     {
         return view('events.index');
     }
+    public function detail()
+    {
+        return view('events.detail');
+    }
+    public function detail_guest()
+    {
+        return view('events.detail_guest');
+    }
 }
