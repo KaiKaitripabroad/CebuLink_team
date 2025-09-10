@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -13,6 +16,23 @@ class PostController extends Controller
     public function create()
     {
         return view('posts.create');
+    }
+    function store(Request $request)
+    {
+        // dd($request);
+        // ファイルがあれば保存
+        if ($request->hasFile('img_url')) {
+            $path = $request->file('img_url')->store('uploads', 'public');
+        }
+        //$requestに入っている値を、new Postでデータベースに保存するという記述
+        $post = new Post;
+        //左辺:テーブル、右辺が送られてきた値(fromから送られてきたnameが入っている)
+        $post->img_url = $path ?? null;
+        $post->text = $request->text;
+        $post->user_id = auth()->id();
+        $post->save();
+
+        return redirect()->route('posts.store', $post);
     }
     public function edit($id)
     {

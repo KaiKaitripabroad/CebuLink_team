@@ -7,6 +7,46 @@ main {
     margin: 0 auto;
 }
 
+/* 画面中央に配置（親全体の中央に置きたい場合） */
+.upload-wrapper {
+    min-height: 50vh; /* 縦方向の余白。中央寄せ不要なら削除OK */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 正方形の□（画面の約1/3の幅） */
+.upload-box {
+    width: 33.33vw; /* 画面幅の3分の1 */
+    aspect-ratio: 1 / 1; /* 正方形にする */
+    border: 2px dashed #000000; /* □の枠線。solidにしてもOK */
+    border-radius: 10px; /* 角丸 */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* ＋を完全中央に */
+    cursor: pointer;
+    user-select: none;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+/* ＋のサイズは画面幅に応じて可変 */
+.plus-icon {
+    font-size: clamp(40px, 8vw, 120px);
+    line-height: 1;
+    color: #999;
+}
+
+/* ホバー時のちょいアクセント */
+.upload-box:hover {
+    border-color: #888;
+    background-color: #fafafa;
+}
+.preview-image {
+    margin-top: 10px;
+    max-width: 100%;
+    border-radius: 8px;
+    display: block;
+}
 /* 画像エリア */
 .image-area {
     width: 100%;
