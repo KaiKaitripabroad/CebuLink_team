@@ -11,7 +11,9 @@ class PostController extends Controller
 {
     public function index()
     {
-        return view('posts.index');
+        // 新しい投稿から順に取得
+        $posts = Post::latest()->get();
+        return view('posts.index', compact('posts'));
     }
     public function create()
     {
