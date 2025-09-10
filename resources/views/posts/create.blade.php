@@ -5,34 +5,39 @@
     <link rel="stylesheet" href="{{ asset('css/post.css') }}">
 @endsection
 <main>
-    <div class="upload-area">
-        <div class="plus-icon">＋</div>
-        <p>画像を追加</p>
-    </div>
+    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="upload-wrapper">
+            <label for="imageUpload" class="upload-box">
+                <span class="plus-icon" @if (!empty($post?->img_url)) style="display:none;" @endif>＋</span>
+                <img id="preview" src="{{ !empty($post?->img_url) ? asset('storage/' . $post->img_url) : '' }}"
+                    alt="Image Preview" class="preview-image"
+                    style="{{ !empty($post?->img_url) ? '' : 'display:none;' }}">
+            </label>
+            <input type="file" name="img_url" id="imageUpload" accept="image/*" hidden>
 
-    <div class="form-group">
-        <label for="title">title:</label>
-        <input type="text" id="title" placeholder="タイトルを入力">
-    </div>
-
-    <div class="form-group">
-        <label for="text">text:</label>
-        <textarea id="text" rows="4" placeholder="本文を入力"></textarea>
-    </div>
-
-    <div class="tag-section">
-        <label>tag:</label>
-        <div class="tags">
-            <button class="tag yellow">food</button>
-            <button class="tag green">shop</button>
-            <button class="tag blue">event</button>
-            <button class="tag orange">volunteer</button>
-            <button class="tag pink">sightseeing</button>
-            <button class="tag purple">others</button>
+            {{-- DBに保存されている画像があれば表示 --}}
         </div>
-    </div>
 
-    <button class="share-button">share</button>
+        <div class="form-group">
+            <label for="text">text:</label>
+            <textarea id="text" rows="4" placeholder="本文を入力" name="text"></textarea>
+        </div>
+
+        <div class="tag-section">
+            <label>tag:</label>
+            <div class="tags">
+                <button class="tag yellow">food</button>
+                <button class="tag green">shop</button>
+                <button class="tag blue">event</button>
+                <button class="tag orange">volunteer</button>
+                <button class="tag pink">sightseeing</button>
+                <button class="tag purple">others</button>
+            </div>
+        </div>
+        <button class="share-button">share</button>
+    </form>
     <button class="back-button" onclick="history.back()">戻る</button>
+    <script src="{{ asset('js/post.js') }}"></script>
 </main>
 @endsection

@@ -14,6 +14,7 @@ class Post extends Model
         'title',
         'content',
         'user_id',
+        'img_url',
         'created_at',
         'updated_at',
     ];
