@@ -18,7 +18,7 @@
     @foreach ($posts as $post)
         <article class="post-card">
             <div class="post-header">
-                <p class="post-author">@fukushi</p>
+                <p class="post-author">{{ '@' . ($post->user->username ?? $post->user->name) }}</p>
             </div>
             <div class="post-image-container">
                 @if ($post->img_url)

@@ -12,7 +12,7 @@ class PostController extends Controller
     public function index()
     {
         // 新しい投稿から順に取得
-        $posts = Post::latest()->get();
+        $posts = Post::with('user')->latest()->get();
         return view('posts.index', compact('posts'));
     }
     public function create()

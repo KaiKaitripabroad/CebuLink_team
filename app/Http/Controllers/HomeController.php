@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 
 class HomeController extends Controller
@@ -26,8 +26,9 @@ class HomeController extends Controller
     public function index()
     {
          // 投稿を新しい順に取得
+        $user = Auth::user();
         $posts = Post::latest()->get();
 
-        return view('home', compact('posts'));
+        return view('home', compact('posts', 'user'));
     }
 }
