@@ -17,7 +17,7 @@
 }
 .chatify-shell.list .messenger-messagingView,
 .chatify-shell.list .messenger-infoView {
-    display: none;
+    /* display: none; */
 }
 
 .chatify-shell.chat .messenger-messagingView {
@@ -26,7 +26,7 @@
 }
 .chatify-shell.chat .messenger-listView,
 .chatify-shell.chat .messenger-infoView {
-    display: none;
+    /* display: none; */
 }
 
 .chatify-shell.info .messenger-infoView {
@@ -35,7 +35,7 @@
 }
 .chatify-shell.info .messenger-listView,
 .chatify-shell.info .messenger-messagingView {
-    display: none;
+    /* display: none; */
 }
 
 .chatify-tabs {
