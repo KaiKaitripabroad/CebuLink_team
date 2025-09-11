@@ -17,6 +17,11 @@
             <input type="file" name="img_url" id="imageUpload" accept="image/*" hidden>
 
             {{-- DBに保存されている画像があれば表示 --}}
+            @if ($errors->any())
+                <script>
+                    alert("{{ implode('\n', $errors->all()) }}");
+                </script>
+            @endif
         </div>
 
         <div class="form-group">

@@ -21,20 +21,29 @@ class PostController extends Controller
     }
     function store(Request $request)
     {
-        // dd($request);
-        // ファイルがあれば保存
-        if ($request->hasFile('img_url')) {
-            $path = $request->file('img_url')->store('uploads', 'public');
-        }
-        //$requestに入っている値を、new Postでデータベースに保存するという記述
-        $post = new Post;
-        //左辺:テーブル、右辺が送られてきた値(fromから送られてきたnameが入っている)
-        $post->img_url = $path ?? null;
-        $post->text = $request->text;
-        $post->user_id = auth()->id();
-        $post->save();
+        // バリデーション
+        $request->validate([
+            'img_url' => 'nullable|image|max:5120', // 5MBまで
+            'text'    => 'nullable|string|max:1000',
+        ]);
 
-        return redirect()->route('posts.store', $post);
+    // 画像もテキストも空ならエラー
+    if (!$request->hasFile('img_url') && empty($request->text)) {
+        return back()->withErrors(['input' => '画像またはテキストを入力してください'])->withInput();
+    }
+
+    $path = null;
+    if ($request->hasFile('img_url')) {
+        $path = $request->file('img_url')->store('uploads', 'public');
+    }
+
+    $post = new Post();
+    $post->img_url = $path;
+    $post->text    = $request->text;
+    $post->user_id = auth()->id();
+    $post->save();
+
+        return redirect()->route('posts.store')->with('success', '投稿が作成されました');
     }
     public function edit($id)
     {
