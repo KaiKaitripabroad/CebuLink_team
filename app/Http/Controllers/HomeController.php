@@ -25,10 +25,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-         // 投稿を新しい順に取得
+        // 投稿を新しい順に取得
         $user = Auth::user();
         $posts = Post::latest()->get();
 
         return view('home', compact('posts', 'user'));
+    }
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+
+        $posts = Post::where('text', 'like', "%{$keyword}%")
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('home', compact('posts', 'keyword'));
     }
 }
