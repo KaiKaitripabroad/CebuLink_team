@@ -3,7 +3,7 @@
 
 
 @php($v = request('v', 'chat')) {{-- list / chat / info --}}
-<div class="chatify-shell {{ in_array($v, ['list','chat','info']) ? $v : 'chat' }}">
+<div class="chatify-shell {{ in_array($v, ['list', 'chat', 'info']) ? $v : 'chat' }}">
     <nav class="chatify-tabs">
         <a class="{{ $v === 'list' ? 'active' : '' }}" href="{{ route('chat', ['v' => 'list']) }}">Messages</a>
         <a class="{{ $v === 'chat' ? 'active' : '' }}" href="{{ route('chat', ['v' => 'chat']) }}">Chat</a>
@@ -18,7 +18,7 @@
             {{-- Header and search bar --}}
             <div class="m-header">
                 <nav>
-                    <a href="#"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">MESSAGES</span>
+                    <a href="#"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">Cebulink+ chat</span>
                     </a>
                     {{-- header buttons --}}
                     <nav class="m-header-right">
@@ -27,12 +27,12 @@
                     </nav>
                 </nav>
                 {{-- Search input --}}
-                <input type="text" class="messenger-search" placeholder="Search" />
+                <input type="text" class="messenger-search" placeholder="🔍 検索" />
                 {{-- Tabs --}}
                 {{-- <div class="messenger-listView-tabs">
-                <a href="#" class="active-tab" data-view="users">
-                    <span class="far fa-user"></span> Contacts</a>
-            </div> --}}
+                    <a href="#" class="active-tab" data-view="users">
+                        <span class="far fa-user"></span> Contacts</a>
+                </div> --}}
             </div>
             {{-- tabs and lists --}}
             <div class="m-body contacts-container">
@@ -55,9 +55,9 @@
                 {{-- ---------------- [ Search Tab ] ---------------- --}}
                 <div class="messenger-tab search-tab app-scroll" data-view="search">
                     {{-- items --}}
-                    <p class="messenger-title"><span>Search</span></p>
+                    <p class="messenger-title"><span>検索</span></p>
                     <div class="search-records">
-                        <p class="message-hint center-el"><span>Type to search..</span></p>
+                        <p class="message-hint center-el"><span>検索中...</span></p>
                     </div>
                 </div>
             </div>
@@ -80,21 +80,20 @@
                     <nav class="m-header-right">
                         <a href="#" class="add-to-favorite"><i class="fas fa-star"></i></a>
                         <a href="{{ route('home') }}"><i class="fas fa-home"></i></a>
-                        <a href="#" class="show-infoSide"><i class="fas fa-info-circle"></i></a>
                     </nav>
                 </nav>
                 {{-- Internet connection --}}
                 <div class="internet-connection">
-                    <span class="ic-connected">Connected</span>
-                    <span class="ic-connecting">Connecting...</span>
-                    <span class="ic-noInternet">No internet access</span>
+                    <span class="ic-connected">wi-fi発見!!</span>
+                    <span class="ic-connecting">接続中...</span>
+                    <span class="ic-noInternet">internetがないよ🥺</span>
                 </div>
             </div>
 
             {{-- Messaging area --}}
             <div class="m-body messages-container app-scroll">
                 <div class="messages">
-                    <p class="message-hint center-el"><span>Please select a chat to start messaging</span></p>
+                    <p class="message-hint center-el"><span>DMを送信してみよう!!</span></p>
                 </div>
                 {{-- Typing indicator --}}
                 <div class="typing-indicator">
