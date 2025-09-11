@@ -1,43 +1,77 @@
-/* 全体の余白とフォント */
+/* 全体レイアウト */
 main {
-    font-family: "Helvetica", "Arial", sans-serif;
-    padding: 15px;
-    max-width: 400px;
+    font-family: "Poppins", "M PLUS Rounded 1c", sans-serif;
+    background-color: #ffffff;
+    padding: 16px;
+    max-width: 480px;
     margin: 0 auto;
 }
 
-/* 画像 */
-.image-area img {
+/* 画像エリア（高さ1/3） */
+.image-area {
     width: 100%;
-    height: auto;
+    height: 33vh; /* 画面の高さの1/3 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
     border-radius: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
+    background-color: #f0f0f0;
 }
 
-/* ラベルと入力フォーム */
+.image-area img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 入力フォーム */
 .form-group {
-    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
 }
 
 .form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 2px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: #333;
 }
 
+/* input と textarea 共通 */
 .form-group input,
 .form-group textarea {
-    width: 100%;
-    border: none;
-    background: transparent;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 8px;
     font-size: 14px;
-    resize: none;
     outline: none;
+    transition: border-color 0.2s;
+}
+
+/* フォーカス時の強調 */
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #007bff;
+}
+
+/* タイトルだけ少し太字に見せたい場合（任意） */
+#title {
+    font-weight: 600;
 }
 
 /* タグセクション */
 .tag-section {
-    margin: 15px 0;
+    margin-top: 16px;
+}
+
+.tag-section label {
+    font-weight: 600;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 6px;
 }
 
 .tags {
@@ -48,66 +82,72 @@ main {
 
 .tag {
     border: none;
-    padding: 5px 12px;
-    border-radius: 15px;
+    border-radius: 20px;
+    padding: 6px 14px;
     font-size: 13px;
-    font-weight: bold;
-    color: #000;
+    font-weight: 500;
+    color: #fff;
     cursor: pointer;
+    transition: transform 0.15s ease;
 }
 
-/* タグの色 */
+.tag:hover {
+    transform: scale(1.05);
+}
+
+/* タグ色 */
 .tag.yellow {
-    background-color: #ffd966;
-} /* food */
+    background-color: #f6c344;
+}
 .tag.orange {
-    background-color: #f6b26b;
-} /* shop */
+    background-color: #f28b2f;
+}
 .tag.purple {
-    background-color: #8e7cc3;
-    color: #fff;
-} /* event */
+    background-color: #9b59b6;
+}
 .tag.green {
-    background-color: #93c47d;
-} /* volunteer */
+    background-color: #27ae60;
+}
 .tag.pink {
-    background-color: #e06666;
-    color: #fff;
-} /* sightseeing */
+    background-color: #e67e9f;
+}
 .tag.blue {
-    background-color: #6fa8dc;
-    color: #fff;
-} /* others */
-
-/* シェアボタン */
-.share-button {
-    display: block;
-    width: 60%;
-    margin: 20px auto;
-    background: #000;
-    color: #fff;
-    border: none;
-    padding: 8px;
-    border-radius: 6px;
-    font-size: 14px;
-    cursor: pointer;
+    background-color: #3498db;
 }
 
+/* ボタン共通 */
 .share-button,
 .back-button {
     display: block;
     width: 100%;
-    padding: 10px;
-    margin-top: 10px;
+    padding: 12px;
+    margin-top: 20px;
     font-size: 16px;
-    background-color: #000;
-    color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
+    text-align: center;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
 }
 
+/* シェアボタン */
+.share-button {
+    background-color: #000;
+    color: #fff;
+}
+
+.share-button:hover {
+    background-color: #333;
+}
+
+/* 戻るボタン */
 .back-button {
-    margin-top: 40px;
-    background-color: #555; /* グレー系で「戻る」感を出す */
+    margin-top: 10px;
+    background-color: #555;
+    color: #fff;
+}
+
+.back-button:hover {
+    background-color: #444;
 }
