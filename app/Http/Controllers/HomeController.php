@@ -25,10 +25,26 @@ class HomeController extends Controller
      */
     public function index()
     {
-         // 投稿を新しい順に取得
+        // 投稿を新しい順に取得
         $user = Auth::user();
         $posts = Post::latest()->get();
 
         return view('home', compact('posts', 'user'));
+    }
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+
+        $posts = Post::where(function ($query) use ($keyword) {
+            $query->where('text', 'like', "%{$keyword}%")
+                ->orWhereHas('user', function ($q) use ($keyword) {
+                    $q->where('username', 'like', "%{$keyword}%")
+                        ->orWhere('name', 'like', "%{$keyword}%");
+                });
+        })
+        ->latest() // 最新の投稿から順に
+        ->get();
+
+        return view('home', compact('posts', 'keyword'));
     }
 }
