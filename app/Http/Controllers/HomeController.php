@@ -35,9 +35,15 @@ class HomeController extends Controller
     {
         $keyword = $request->input('keyword');
 
-        $posts = Post::where('text', 'like', "%{$keyword}%")
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $posts = Post::where(function ($query) use ($keyword) {
+            $query->where('text', 'like', "%{$keyword}%")
+                ->orWhereHas('user', function ($q) use ($keyword) {
+                    $q->where('username', 'like', "%{$keyword}%")
+                        ->orWhere('name', 'like', "%{$keyword}%");
+                });
+        })
+        ->latest() // 最新の投稿から順に
+        ->get();
 
         return view('home', compact('posts', 'keyword'));
     }
