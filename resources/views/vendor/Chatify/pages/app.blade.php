@@ -18,7 +18,7 @@
             {{-- Header and search bar --}}
             <div class="m-header">
                 <nav>
-                    <a href="#"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">Cebulink+ chat</span>
+                    <a href="{{route('home')}}"><i class="fas fa-arrow-left"></i> <span class="messenger-headTitle">Cebulink+ chat</span>
                     </a>
                     {{-- header buttons --}}
                     <nav class="m-header-right">
