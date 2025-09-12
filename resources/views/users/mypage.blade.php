@@ -29,7 +29,7 @@
                 @csrf
                 @method('PATCH')
                 {{-- プロフィールヘッダー --}}
-                <div class="profile-header" style="display: flex; jastify-content:space-between; align-items: center;">
+                <div class="profile-header" style="display: flex; space-between; align-items: center;">
                     <div class="profile-icon">
                         {{-- 実際にはユーザーのアイコン画像へのパスを指定します --}}
                         @if (isset($profile) && $profile->profile_image_url)
