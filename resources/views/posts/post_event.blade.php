@@ -44,15 +44,23 @@
 
         {{-- 時間 --}}
         <div class="form-group">
-            <label for="time">time:</label>
-            <input type="text" id="time" name="time" placeholder="例: 12:00〜">
+            <label for="start_time">イベント開始時刻:</label>
+            <input type="time" id="start_time" name="start_time">
+
+            <label for="end_time">イベント終了時刻:</label>
+            <input type="time" id="end_time" name="end_time">
         </div>
 
         {{-- 場所 --}}
-        <div class="form-group">
-            <input type="text" id="location" name="location" placeholder="場所を入力">
-            <button type="button" onclick="openMap()">地図から選ぶ</button>
-        </div>
+        <label>開催場所を検索してください</ｌ>
+
+        <!-- 入力欄とボタン -->
+        <input type="text" id="address" class="search-box" placeholder="例: 東京駅">
+        <br>
+        <button type="button" class="search-btn" onclick="codeAddress()">検索</button>
+        <div id="map"></div>
+        <p>検索結果: <span id="result"></span></p>
+
 
         {{-- タグ --}}
         <div class="tag-section">
@@ -69,7 +77,51 @@
 
         <button class="share-button">share</button>
     </form>
-    <button class="back-button" onclick="history.back()">戻る</button>
+    <a href="{{ url()->previous() }}" class="back-button">戻る</a>
+
+    <script>
+        let map, geocoder, marker;
+
+        function initMap() {
+            // 初期表示（東京駅）
+            const center = {
+                lat: 35.681236,
+                lng: 139.767125
+            };
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 14,
+                center: center,
+            });
+            geocoder = new google.maps.Geocoder();
+            marker = new google.maps.Marker({
+                map: map
+            });
+        }
+
+        // 住所から地図表示
+        function codeAddress() {
+            const inputAddress = document.getElementById("address").value;
+
+            geocoder.geocode({
+                address: inputAddress
+            }, (results, status) => {
+                if (status === "OK") {
+                    map.setCenter(results[0].geometry.location);
+                    marker.setPosition(results[0].geometry.location);
+
+                    // 結果を表示
+                    document.getElementById("result").textContent =
+                        results[0].formatted_address;
+                } else {
+                    alert("ジオコーディング失敗: " + status);
+                }
+            });
+        }
+    </script>
+
+    <!-- ★ここにAPIキーを入れる -->
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwQGr3lEXxIF39xTbSl4exUYGIXMiErj0&callback=initMap"></script>
     <script src="{{ asset('js/post.js') }}"></script>
 </main>
 @endsection
