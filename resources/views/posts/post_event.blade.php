@@ -56,7 +56,6 @@
 
         <!-- 入力欄とボタン -->
         <input type="text" id="address" class="search-box" placeholder="例: 東京駅">
-        <br>
         <button type="button" class="search-btn" onclick="codeAddress()">検索</button>
         <div id="map"></div>
         <p>検索結果: <span id="result"></span></p>
@@ -77,7 +76,7 @@
 
         <button class="share-button">share</button>
     </form>
-    <a href="{{ url()->previous() }}" class="back-button">戻る</a>
+    <a href="{{route('posts.index')}}" class="back-button">戻る</a>
 
     <script>
         let map, geocoder, marker;

@@ -33,15 +33,19 @@ body {
 /* ヤシの木のシルエット */
 .palm-tree {
     position: absolute;
-    bottom: -10vh; /* 画面下部から少しはみ出す */
-    left: 5vw; /* 左側に配置 */
-    width: 90vw;
-    height: 90vh;
-    background-image: url('images/palm-tree-silhouette.png'); /* ヤシの木の画像を別途用意 */
+    bottom: -8vh; /* 画面下部から少しはみ出す */
+    right: 37vw;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('images/palm-tree-silhouette.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center bottom;
     z-index: 2; /* グラデーションの上に配置 */
+
+    /* ここで傾ける */
+    transform: rotate(12deg);
+    transform-origin: bottom left; /* 左下を基準に回転 */
 }
 
 /* コンテンツ部分 */
@@ -67,7 +71,7 @@ body {
 /* 説明テキストのスタイル */
 .description-text p {
     font-size: 1.25rem;
-    margin-bottom: 2rem;
+    margin-bottom: 25rem;
 }
 
 /* ボタンのスタイル */
@@ -75,7 +79,7 @@ body {
 .guest-button-container {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: 2rem;
     margin-bottom: 1rem;
 }
 
