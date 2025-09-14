@@ -39,4 +39,8 @@ class Post extends Model
         // 多対多のリレーションを使って、指定されたユーザーがこの投稿にいいねしているかを確認
         return $user ? $this->likes()->where('user_id', $user->id)->exists() : false;
     }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

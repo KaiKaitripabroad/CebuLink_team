@@ -54,9 +54,10 @@
                         @endif
                     </div>
 
-                    <a href="{{ route('posts.show', $post) }}" class="comment-button">
+                    {{-- いいね機能のすぐ隣に配置 --}}
+                    <button type="button" class="comment-toggle-button" data-post-id="{{ $post->id }}">
                         <i class="far fa-comment" style="font-size: 24px; color: #333;"></i>
-                    </a>
+                    </button>
                 </div>
                 <div class="actions-right">
                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
@@ -65,6 +66,28 @@
                         <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
                     </svg>
                 </div>
+            </div>
+            <div class="comments-container" id="comments-container-{{ $post->id }}"
+                style="display: none; margin-top: 10px;">
+
+                <div class="comments-list">
+                    @foreach ($post->comments as $comment)
+                        <div
+                            class="comment-item
+                @if ($comment->user_id === Auth::id()) my-comment @else other-comment @endif">
+                            <strong>{{ $comment->user->name }}</strong>
+                            <span>{{ $comment->content }}</span>
+                        </div>
+                    @endforeach
+                </div>
+
+                {{-- コメント投稿フォーム --}}
+                <form action="{{ route('comments.store', $post) }}" method="POST" class="new-comment-form"
+                    data-post-id="{{ $post->id }}">
+                    @csrf
+                    <input type="text" name="content" class="comment-input" placeholder="コメントを追加..." required>
+                    <button type="submit" class="comment-submit-button">投稿</button>
+                </form>
             </div>
             <div class="post-content">
                 <span class="tag">tag_placeholder</span>

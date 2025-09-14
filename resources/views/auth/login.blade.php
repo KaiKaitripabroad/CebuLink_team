@@ -12,7 +12,7 @@
         <input id="email" type="text"
             class="@error('email') is-invalid @enderror"
             name="email" value="{{ old('email') }}"
-            required autofocus placeholder="ユーザー ネーム">
+            required autofocus placeholder="メールアドレス">
 
         @error('email')
             <span class="invalid-feedback">{{ $message }}</span>
