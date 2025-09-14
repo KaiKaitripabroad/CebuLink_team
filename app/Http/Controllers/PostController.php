@@ -12,7 +12,7 @@ class PostController extends Controller
     public function index()
     {
         // 新しい投稿から順に取得
-        $posts = Post::with('user')->latest()->get();
+        $posts = Post::with('user')->withCount('likes')->latest()->get();
         return view('posts.index', compact('posts'));
     }
     public function create()
@@ -27,21 +27,21 @@ class PostController extends Controller
             'text'    => 'nullable|string|max:1000',
         ]);
 
-    // 画像もテキストも空ならエラー
-    if (!$request->hasFile('img_url') && empty($request->text)) {
-        return back()->withErrors(['input' => '画像またはテキストを入力してください'])->withInput();
-    }
+        // 画像もテキストも空ならエラー
+        if (!$request->hasFile('img_url') && empty($request->text)) {
+            return back()->withErrors(['input' => '画像またはテキストを入力してください'])->withInput();
+        }
 
-    $path = null;
-    if ($request->hasFile('img_url')) {
-        $path = $request->file('img_url')->store('uploads', 'public');
-    }
+        $path = null;
+        if ($request->hasFile('img_url')) {
+            $path = $request->file('img_url')->store('uploads', 'public');
+        }
 
-    $post = new Post();
-    $post->img_url = $path;
-    $post->text    = $request->text;
-    $post->user_id = auth()->id();
-    $post->save();
+        $post = new Post();
+        $post->img_url = $path;
+        $post->text    = $request->text;
+        $post->user_id = auth()->id();
+        $post->save();
 
         return redirect()->route('posts.store')->with('success', '投稿が作成されました');
     }

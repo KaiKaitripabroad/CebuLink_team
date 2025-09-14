@@ -10,6 +10,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\GuestController;
+use App\Http\Controllers\LikeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,3 +51,10 @@ Route::get('/events/guest', [App\Http\Controllers\EventController::class, 'index
 Route::get('/mypage', [UserController::class, 'mypage'])->name('users.mypage');
 
 Route::patch('/profile/update', [UserController::class, 'update'])->name('profile.update');
+
+Route::middleware('auth')->group(function () {
+    Route::post('/posts/{post}/like', [LikeController::class, 'like'])->name('posts.like');
+    Route::delete('/posts/{post}/unlike', [LikeController::class, 'unlike'])->name('posts.unlike');
+
+    // 他にも投稿作成など、ログインが必要なルートがあれば、この中に入れると便利です
+});

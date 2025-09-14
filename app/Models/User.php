@@ -46,12 +46,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-        public function profile()
+    public function profile()
     {
         return $this->hasOne(Profile::class);
     }
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+    // Userがした「いいね」
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
     }
 }
