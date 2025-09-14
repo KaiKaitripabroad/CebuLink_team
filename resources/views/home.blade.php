@@ -1,6 +1,7 @@
 @extends('layouts.home_style')
 
 @section('content')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
     <div class="search-container">
         <form action="{{ route('home.search') }}" method="GET">
             <input type="text" name="keyword" placeholder="検索..." value="{{ $keyword ?? '' }}" class="search-input">
@@ -21,7 +22,9 @@
     @foreach ($posts as $post)
         <article class="post-card">
             <div class="post-header">
-                <p class="post-author">{{ '@' . ($post->user->username ?? $post->user->name) }}</p>
+                <p class="post-author">
+                    {{ $post->user ? '@' . ($post->user->username ?? $post->user->name) : '@unknown' }}
+                </p>
             </div>
             <div class="post-image-container">
                 @if ($post->img_url)
@@ -29,19 +32,32 @@
                 @endif
             </div>
             <div class="post-actions">
-                <div class="actions-left">
-                    <svg class="icon-heart" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
-                        viewBox="0 0 24 24" fill="red" stroke="red" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path
-                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-                        </path>
-                    </svg>
-                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                    </svg>
+                <div class="actions-left" style="display: flex; align-items: center; gap: 50px;">
+                    <div class="like-section" id="like-section-{{ $post->id }}">
+                        @if ($post->isLikedBy(Auth::user()))
+                            <form action="{{ route('posts.unlike', $post) }}" method="POST" class="like-form"
+                                data-post-id="{{ $post->id }}" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="like-button">
+                                    <i class="fas fa-heart" style="color: #f21818;"></i>
+                                </button>
+                            </form>
+                        @else
+                            <form action="{{ route('posts.like', $post) }}" method="POST" class="like-form"
+                                data-post-id="{{ $post->id }}" style="display: inline;">
+                                @csrf
+                                <button type="submit" class="like-button">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </form>
+                        @endif
+                    </div>
+
+                    {{-- いいね機能のすぐ隣に配置 --}}
+                    <button type="button" class="comment-toggle-button" data-post-id="{{ $post->id }}">
+                        <i class="far fa-comment" style="font-size: 24px; color: #333;"></i>
+                    </button>
                 </div>
                 <div class="actions-right">
                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
@@ -51,10 +67,35 @@
                     </svg>
                 </div>
             </div>
+            <div class="comments-container" id="comments-container-{{ $post->id }}"
+                style="display: none; margin-top: 10px;">
+
+                <div class="comments-list">
+                    @foreach ($post->comments as $comment)
+                        <div
+                            class="comment-item
+                @if ($comment->user_id === Auth::id()) my-comment @else other-comment @endif">
+                            <strong>{{ $comment->user->name }}</strong>
+                            <span>{{ $comment->content }}</span>
+                        </div>
+                    @endforeach
+                </div>
+
+                {{-- コメント投稿フォーム --}}
+                <form action="{{ route('comments.store', $post) }}" method="POST" class="new-comment-form"
+                    data-post-id="{{ $post->id }}">
+                    @csrf
+                    <input type="text" name="content" class="comment-input" placeholder="コメントを追加..." required>
+                    <button type="submit" class="comment-submit-button">投稿</button>
+                </form>
+            </div>
             <div class="post-content">
                 <span class="tag">tag_placeholder</span>
                 <p class="caption">{{ $post->text }}</p>
             </div>
         </article>
     @endforeach
+@endsection
+@section('scripts')
+    <script src="{{ asset('js/home.js') }}"></script>
 @endsection

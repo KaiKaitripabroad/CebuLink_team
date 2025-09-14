@@ -42,7 +42,7 @@
         </div>
         <button class="share-button">share</button>
     </form>
-    <button class="back-button" onclick="history.back()">戻る</button>
+    <a href="{{route('posts.index')}}" class="back-button">戻る</a>
     <script src="{{ asset('js/post.js') }}"></script>
 </main>
 @endsection

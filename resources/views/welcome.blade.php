@@ -12,7 +12,7 @@
 <body>
     <div class="welcome-container">
         <div class="background-gradient"></div>
-        <div class="palm-tree"></div>
+        <img class="palm-tree" src="images/palm-tree-silhouette.png"></img>
 
         <div class="content-wrapper">
             <div class="logo">

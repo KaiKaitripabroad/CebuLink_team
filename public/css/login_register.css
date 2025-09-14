@@ -1,0 +1,93 @@
+/* 背景のグラデーション */
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom right, #FFD54F, #4FC3F7);
+    font-family: "Helvetica Neue", sans-serif;
+}
+
+/* コンテナ */
+.register-container {
+    width: 320px;
+    text-align: center;
+}
+
+/* ロゴ */
+.register-container .logo {
+    font-family: 'Pacifico', cursive; /* 似た手書きフォント */
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+/* 入力フォーム */
+.register-form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+}
+
+/* ボタン */
+.button-group {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.btn-cancel, .btn-signup {
+    padding: 8px 20px;
+    border: 1px solid #333;
+    border-radius: 20px;
+    text-decoration: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-cancel:hover, .btn-signup:hover {
+    background: rgba(255,255,255,0.5);
+}
+
+/* ログイン用 */
+.login-container {
+    width: 320px;
+    text-align: center;
+}
+
+.login-container .logo {
+    font-family: "Pacifico", cursive;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+}
+
+/* ログインボタン */
+.btn-login {
+    padding: 8px 20px;
+    border: 1px solid #333;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-login:hover {
+    background: rgba(255, 255, 255, 0.9);
+}
+

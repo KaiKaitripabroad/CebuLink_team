@@ -1,9 +1,9 @@
 /* 基本設定とフォント */
 :root {
-    --color-food: #FCE1B3;
-    --color-shop: #D4F4DD;
-    --color-event: #C3E6F5;
-    --border-color: #E0E0E0;
+    --color-food: #fce1b3;
+    --color-shop: #d4f4dd;
+    --color-event: #c3e6f5;
+    --border-color: #e0e0e0;
     --text-dark: #333;
     --text-light: #888;
 }
@@ -15,7 +15,7 @@
 }
 
 body {
-    font-family: 'Poppins', 'Helvetica Neue', sans-serif;
+    font-family: "Poppins", "Helvetica Neue", sans-serif;
     background-color: #f0f2f5;
     display: flex;
     justify-content: center;
@@ -42,10 +42,10 @@ body {
 }
 
 .logo {
-    font-family: 'Pacifico', cursive;
+    font-family: "Pacifico", cursive;
     font-weight: 700;
     color: transparent;
-    background: linear-gradient(90deg, #6DD5FA, #FFC371, #FF5F6D);
+    background: linear-gradient(90deg, #6dd5fa, #ffc371, #ff5f6d);
     -webkit-background-clip: text;
     background-clip: text;
 }
@@ -74,8 +74,8 @@ body {
 }
 
 .search-input:focus {
-    border-color: #007BFF;
-    box-shadow: 0 0 5px rgba(0,123,255,0.3);
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
 .search-icon {
@@ -86,7 +86,6 @@ body {
     color: #888;
     pointer-events: none; /* アイコンをクリックしても入力欄にフォーカスされる */
 }
-
 
 /* フィルターボタン */
 .filter-container {
@@ -106,9 +105,15 @@ body {
     cursor: pointer;
 }
 
-.filter-btn.food { background-color: var(--color-food); }
-.filter-btn.shop { background-color: var(--color-shop); }
-.filter-btn.event { background-color: var(--color-event); }
+.filter-btn.food {
+    background-color: var(--color-food);
+}
+.filter-btn.shop {
+    background-color: var(--color-shop);
+}
+.filter-btn.event {
+    background-color: var(--color-event);
+}
 
 .dropdown-arrow {
     width: 0;
@@ -154,7 +159,8 @@ body {
     gap: 15px;
 }
 
-.icon, .icon-heart {
+.icon,
+.icon-heart {
     cursor: pointer;
     color: var(--text-dark);
 }
@@ -180,7 +186,6 @@ body {
     color: var(--text-dark);
 }
 
-
 /* フッターナビゲーション */
 .footer-nav {
     display: flex;
@@ -204,4 +209,117 @@ body {
     border-radius: 50%;
     width: 44px;
     height: 44px;
+}
+
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer; /* マウスカーソルを指の形にする */
+    outline: none; /* クリック時の青い枠線を消す */
+}
+
+.fa-heart {
+    font-size: 24px; /* ここでサイズを調整 */
+}
+
+/* 自分のコメント（右寄せ・青色） */
+.my-comment {
+    margin-left: auto;
+    background: #007bff;
+    color: #fff;
+    border-bottom-right-radius: 4px;
+    text-align: left;
+}
+
+/* 相手のコメント（左寄せ・グレー） */
+.other-comment {
+    margin-right: auto;
+    background: #f1f1f1;
+    color: #333;
+    border-bottom-left-radius: 4px;
+}
+
+.comments-container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.comments-list {
+    max-height: 240px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding-right: 6px; /* スクロールバーにかぶらないように */
+}
+
+/* スクロールバーのデザイン */
+.comments-list::-webkit-scrollbar {
+    width: 6px;
+}
+.comments-list::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
+.comments-list::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
+
+.comment-item {
+    max-width: 70%;   /* 吹き出しっぽく横幅制限 */
+    padding: 8px 12px;
+    border-radius: 16px;
+    font-size: 14px;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.comment-item:last-child {
+    border-bottom: none;
+}
+
+.comment-item strong {
+    margin-right: 6px;
+    color: #007bff;
+}
+
+/* コメント投稿フォーム */
+.new-comment-form {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.comment-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.comment-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
+}
+
+.comment-submit-button {
+    padding: 6px 14px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+.comment-submit-button:hover {
+    background: #0056b3;
+}
+.comment-submit-button:active {
+    transform: scale(0.95);
 }
