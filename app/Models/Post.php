@@ -23,4 +23,20 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'likes', 'post_id', 'user_id')->withTimestamps();
+    }
+
+    public function likedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'likes', 'post_id', 'user_id')->withTimestamps();
+    }
+
+    public function isLikedBy($user)
+    {
+        // 多対多のリレーションを使って、指定されたユーザーがこの投稿にいいねしているかを確認
+        return $user ? $this->likes()->where('user_id', $user->id)->exists() : false;
+    }
 }

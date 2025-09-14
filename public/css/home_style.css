@@ -205,3 +205,15 @@ body {
     width: 44px;
     height: 44px;
 }
+
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer; /* マウスカーソルを指の形にする */
+    outline: none; /* クリック時の青い枠線を消す */
+}
+
+.fa-heart {
+    font-size: 24px; /* ここでサイズを調整 */
+}
