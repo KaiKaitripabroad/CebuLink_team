@@ -15,15 +15,17 @@
             <h1>Cebu イベント情報</h1>
         </div>
         <div class="event-list">
-            @for ($i = 0; $i <= 10; $i++)
-                <a href="{{ route('events.detail') }}" class="event-card">
-                    <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=500" class="event-image">
+            @foreach ($events as $event)
+                <a href="{{ route('events.detail', $event->id) }}" class="event-card">
+                    <img src="{{ $event->img_url ? asset('storage/' . $event->img_url) : asset('images/no-image.png') }}"
+                        alt="イベント画像" class="event-image">
                     <div class="event-info">
-                        <h3>aaa</h3>
-                        <p>aa</p>
+                        <h3>{{ $event->title }}</h3>
+                        <p>{{ Str::limit($event->text, 50) }}</p>
                     </div>
                 </a>
-            @endfor
+            @endforeach
+
         </div>
     </section>
     <script src="{{ asset('js/event_style.js') }}"></script>

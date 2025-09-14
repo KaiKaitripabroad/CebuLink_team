@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ asset('css/post.css') }}">
 @endsection
 <main>
-    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="upload-wrapper">
             <label for="imageUpload" class="upload-box">
@@ -52,30 +52,31 @@
         </div>
 
         {{-- 場所 --}}
-        <label>開催場所を検索してください</ｌ>
-
-        <!-- 入力欄とボタン -->
-        <input type="text" id="address" class="search-box" placeholder="例: 東京駅">
-        <br>
-        <button type="button" class="search-btn" onclick="codeAddress()">検索</button>
-        <div id="map"></div>
-        <p>検索結果: <span id="result"></span></p>
+        <label>開催場所を検索してください</label>
 
 
-        {{-- タグ --}}
-        <div class="tag-section">
-            <label>tag:</label>
-            <div class="tags">
-                <button class="tag yellow">food</button>
-                <button class="tag green">shop</button>
-                <button class="tag blue">event</button>
-                <button class="tag orange">volunteer</button>
-                <button class="tag pink">sightseeing</button>
-                <button class="tag purple">others</button>
+            <!-- 入力欄とボタン -->
+            <input type="text" id="address" class="search-box" placeholder="例: 東京駅">
+            <br>
+            <button type="button" class="search-btn" onclick="codeAddress()">検索</button>
+            <div id="map"></div>
+            <p>検索結果: <span id="result"></span></p>
+
+
+            {{-- タグ --}}
+            <div class="tag-section">
+                <label>tag:</label>
+                <div class="tags">
+                    <button class="tag yellow">food</button>
+                    <button class="tag green">shop</button>
+                    <button class="tag blue">event</button>
+                    <button class="tag orange">volunteer</button>
+                    <button class="tag pink">sightseeing</button>
+                    <button class="tag purple">others</button>
+                </div>
             </div>
-        </div>
 
-        <button class="share-button">share</button>
+            <button class="share-button">share</button>
     </form>
     <a href="{{ url()->previous() }}" class="back-button">戻る</a>
 

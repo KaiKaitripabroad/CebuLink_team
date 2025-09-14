@@ -40,8 +40,12 @@ Route::get('/posts', [App\Http\Controllers\PostController::class, 'index'])->nam
 Route::get('/posts/post_event', [App\Http\Controllers\PostController::class, 'post_event'])->name('posts.post_event');
 Route::get('/posts/create', [App\Http\Controllers\PostController::class, 'create'])->name('posts.create');
 Route::post('/home', [App\Http\Controllers\PostController::class, 'store'])->name('posts.store');
+Route::middleware('auth')->group(function () {
+    Route::post('/events', [EventController::class, 'store'])->name('events.store');
+});
+
 Route::get('/posts/{id}/edit', [App\Http\Controllers\PostController::class, 'edit'])->name('posts.edit');
-Route::get('/posts/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
+Route::get('/posts/{id+}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
 // ...existing code...
 Route::get('/guest', [App\Http\Controllers\GuestController::class, 'index'])->name('guest.index');
 
