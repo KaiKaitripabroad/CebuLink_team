@@ -323,3 +323,9 @@ button {
 .comment-submit-button:active {
     transform: scale(0.95);
 }
+.bookmark-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}

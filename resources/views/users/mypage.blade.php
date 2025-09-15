@@ -4,7 +4,7 @@
     <div id="menu" class="menu">
         <ul>
             <li><a href="{{ route('home') }}">設定</a></li>
-            <li><a href="{{ route('home') }}">保存済み一覧</a></li>
+            <li><a href="{{ route('bookmark.index') }}">保存済み一覧</a></li>
             <li><a href="{{ route('home') }}">投稿編集</a></li>
             <li>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST">
