@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('title'); // イベントタイトル
             $table->text('text')->nullable(); // イベント本文
             $table->string('img_url')->nullable(); // 画像URL
-            $table->string('location')->nullable(); // 場所
+            $table->decimal('latitude', 10, 7)->nullable();
+            $table->decimal('longitude', 10, 7)->nullable();
             $table->date('date'); // 日付カラム
             $table->dateTime('start_at'); // 開始日時
             $table->dateTime('end_at'); // 終了日時

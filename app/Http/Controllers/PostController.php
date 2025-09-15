@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
-
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -21,6 +20,7 @@ class PostController extends Controller
     }
     function store(Request $request)
     {
+        dd($request->all()); // ← 送信されてる値を確認
         // バリデーション
         $request->validate([
             'img_url' => 'nullable|image|max:5120', // 5MBまで

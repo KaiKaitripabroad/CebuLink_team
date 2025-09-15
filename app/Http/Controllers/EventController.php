@@ -40,6 +40,8 @@ class EventController extends Controller
             'start_time' => 'required',
             'end_time'   => 'required',
             'img_url'        => 'nullable|image|max:5120', // ← img_url ではなく img に
+            'latitude'   => 'nullable|numeric',
+            'longitude'  => 'nullable|numeric',
         ]);
 
         $event = new Event();
@@ -49,6 +51,8 @@ class EventController extends Controller
         $event->start_at = $request->date . ' ' . $request->start_time . ':00';
         $event->end_at   = $request->date . ' ' . $request->end_time . ':00';
         $event->user_id = Auth::id();
+        $event->latitude = $request->latitude;
+        $event->longitude = $request->longitude;
 
         // ファイルがアップロードされていたらstorageに保存
         if ($request->hasFile('img_url')) {
