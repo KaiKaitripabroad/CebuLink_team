@@ -59,12 +59,27 @@
                         <i class="far fa-comment" style="font-size: 24px; color: #333;"></i>
                     </button>
                 </div>
-                <div class="actions-right">
-                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-                    </svg>
+                <div class="bookmark-section" id="bookmark-section-{{ $post->id }}">
+                    @if ($post->isBookmarkedBy(Auth::user()))
+                        {{-- ★ ブックマーク済みの場合（解除フォーム） --}}
+                        <form action="{{ route('posts.unbookmark', $post) }}" method="POST" class="bookmark-form">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bookmark-button">
+                                {{-- 塗りつぶされたアイコン --}}
+                                <i class="fas fa-bookmark" style="font-size: 28px; color: #ffc107;"></i>
+                            </button>
+                        </form>
+                    @else
+                        {{-- ★ 未ブックマークの場合（登録フォーム） --}}
+                        <form action="{{ route('posts.bookmark', $post) }}" method="POST" class="bookmark-form">
+                            @csrf
+                            <button type="submit" class="bookmark-button">
+                                {{-- 枠線のアイコン --}}
+                                <i class="far fa-bookmark" style="font-size: 28px; color: #333;"></i>
+                            </button>
+                        </form>
+                    @endif
                 </div>
             </div>
             <div class="comments-container" id="comments-container-{{ $post->id }}"

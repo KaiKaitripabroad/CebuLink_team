@@ -43,4 +43,19 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+    // この投稿をブックマークしているユーザーとの関係
+    public function bookmarkedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'bookmarks');
+    }
+
+    // 指定されたユーザーがこの投稿をブックマークしているか判定する
+    public function isBookmarkedBy($user)
+    {
+        // ログインしていないユーザーの場合は常にfalse
+        if (!$user) {
+            return false;
+        }
+        return $this->bookmarkedByUsers()->where('user_id', $user->id)->exists();
+    }
 }

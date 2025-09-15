@@ -12,6 +12,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\BookmarkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,9 +63,16 @@ Route::patch('/profile/update', [UserController::class, 'update'])->name('profil
 Route::middleware('auth')->group(function () {
     Route::post('/posts/{post}/like', [LikeController::class, 'like'])->name('posts.like');
     Route::delete('/posts/{post}/unlike', [LikeController::class, 'unlike'])->name('posts.unlike');
-
 });
 Route::middleware('auth')->group(function () {
     Route::get('/posts/{post}/comments', [App\Http\Controllers\CommentController::class, 'index'])->name('comments.index');
     Route::post('/posts/{post}/comments', [App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
 });
+Route::middleware('auth')->group(function () {
+    // ... いいね機能やコメント機能のルート ...
+
+    // 【追加】ブックマーク機能のルート
+    Route::post('/posts/{post}/bookmark', [BookmarkController::class, 'store'])->name('posts.bookmark');
+    Route::delete('/posts/{post}/bookmark', [BookmarkController::class, 'destroy'])->name('posts.unbookmark');
+});
+Route::get('/bookmarks', [BookmarkController::class, 'index'])->name('bookmark.index');
