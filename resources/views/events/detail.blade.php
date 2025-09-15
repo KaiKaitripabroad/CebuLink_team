@@ -5,18 +5,16 @@
     <section class="event-detail">
         <div class="event-card">
             {{-- イベント画像 --}}
-            <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600" alt="イベント画像" class="event-image">
+            <img src="{{ $event->img_url ? asset('storage/' . $event->img_url) : asset('images/no-image.png') }}"
+                class="event-image">
 
             {{-- イベント情報 --}}
             <div class="event-info">
-                <p class="event-date">9/15 15:00~</p>
-                <h2 class="event-title">格闘技観戦好きの会</h2>
-
-                <p class="event-description">
-                    格闘技が好きな方大集合<br>
-                    好きな格闘家について talk!<br>
-                    best game 観戦して趣味を共有しよう！
+                <p class="event-date">{{ \Carbon\Carbon::parse($event->date)->format('n/j') }} <br>
+                    {{ \Carbon\Carbon::parse($event->start_at)->format('H:i') }}~
+                    {{ \Carbon\Carbon::parse($event->end_at)->format('H:i') }}
                 </p>
+                <h2 class="event-title">格闘技観戦好きの会</h2>
 
                 {{-- 場所 --}}
                 <div class="event-location">

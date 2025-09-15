@@ -23,11 +23,12 @@ class EventController extends Controller
         // events.blade.php に渡す
         return view('events.index', compact('events'));
     }
-    public function detail()
+    public function detail($id)
     {
-        return view('events.detail');
+        $event = Event::findOrFail($id);
+        return view('events.detail', compact('event'));
     }
-    public function detail_guest()
+    public function detail_guest($id)
     {
         return view('events.detail_guest');
     }
