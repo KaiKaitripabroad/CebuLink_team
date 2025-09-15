@@ -33,6 +33,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home/search', [HomeController::class, 'search'])->name('home.search');
 Route::get('/events', [App\Http\Controllers\EventController::class, 'index'])->name('events.index');
+Route::get('/events/filter', [EventController::class, 'filterByDate'])->name('events.filterByDate');
 Route::middleware(['auth'])->group(function () {
     Route::get('/chat', [\Chatify\Http\Controllers\MessagesController::class, 'index'])
         ->name('chat');

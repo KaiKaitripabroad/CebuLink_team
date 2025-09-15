@@ -65,4 +65,23 @@ class EventController extends Controller
 
         return redirect()->route('events.index')->with('success', 'イベントを作成しました！');
     }
+    public function filterByDate(Request $request)
+    {
+        // 'date'というパラメータが送られてきた場合
+        if ($request->has('date')) {
+            $selectedDate = $request->input('date');
+
+            // 'start_date'カラム（実際のカラム名に合わせてください）の日付が一致するイベントを取得
+            $events = Event::whereDate('start_at', '<=', $selectedDate)
+                ->whereDate('end_at', '>=', $selectedDate)
+                ->latest()
+                ->get();
+        } else {
+            // 'date'パラメータがない場合（「ALL」表示用）は、全てのイベントを取得
+            $events = Event::latest()->get();
+        }
+
+        // イベントリストの部分だけをレンダリングするBladeビューを返す
+        return view('events.partials.event-list', compact('events'));
+    }
 }
