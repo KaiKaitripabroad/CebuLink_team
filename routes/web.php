@@ -13,6 +13,7 @@ use App\Http\Controllers\GuestController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\EventParticipantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,3 +77,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/posts/{post}/bookmark', [BookmarkController::class, 'destroy'])->name('posts.unbookmark');
 });
 Route::get('/bookmarks', [BookmarkController::class, 'index'])->name('bookmark.index');
+Route::middleware('auth')->group(function () {
+    // ... 既存のルート ...
+
+    // 【追加】イベント参加・キャンセル用のルート
+    Route::post('/events/{event}/join', [EventParticipantController::class, 'join'])->name('events.join');
+    Route::delete('/events/{event}/cancel', [EventParticipantController::class, 'cancel'])->name('events.cancel');
+});
