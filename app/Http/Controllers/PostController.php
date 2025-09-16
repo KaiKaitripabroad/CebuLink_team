@@ -45,19 +45,10 @@ class PostController extends Controller
 
         return redirect()->route('posts.store')->with('success', '投稿が作成されました');
     }
-    // public function edit($id)
-    // {
-    //     return view('posts.edit', ['id' => $id]);
-    // }
-
-    // public function show($id)
-    // {
-    //     return view('posts.show', ['id' => $id]);
-    // }
-    // public function post_event()
-    // {
-    //     return view('posts.post_event');
-    // }
+    public function post_event()
+    {
+        return view('posts.post_event');
+    }
 
     public function edit(Post $post)
     {
@@ -75,7 +66,6 @@ class PostController extends Controller
         // 投稿が自分のものでない場合は403エラー
         if ($post->user_id !== auth()->id()) {
             abort(403);
-
         }
 
         // バリデーション
