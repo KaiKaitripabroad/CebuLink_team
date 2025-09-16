@@ -1,11 +1,12 @@
 /* 基本設定とフォント */
 :root {
-    --color-food: #fce1b3;
-    --color-shop: #d4f4dd;
-    --color-event: #c3e6f5;
-    --border-color: #e0e0e0;
-    --text-dark: #333;
-    --text-light: #888;
+    --primary-color: #ff7f50; /* 温かみのあるコーラル */
+    --secondary-color: #48d1cc; /* 穏やかなターコイズ */
+    --background-color: #fdf8f5; /* 砂浜のような暖色系ベージュ */
+    --surface-color: #ffffff; /* カードの背景色 */
+    --text-color: #4a4a4a; /* ソフトなダークグレー */
+    --text-light: #9b9b9b; /* 明るいグレー */
+    --border-color: #eaeaea;
 }
 
 * {
@@ -15,8 +16,9 @@
 }
 
 body {
-    font-family: "Poppins", "Helvetica Neue", sans-serif;
-    background-color: #f0f2f5;
+    font-family: "Nunito", sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
     display: flex;
     justify-content: center;
 }
@@ -25,10 +27,9 @@ body {
 .mobile-container {
     width: 480px;
     height: 1040px; /* iPhone 12 Pro size */
-    background-color: #ffffff;
-    border: 1px solid #ccc;
-
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
     overflow: hidden; /* 中身がはみ出ないように */
@@ -43,7 +44,7 @@ body {
 
 .logo {
     font-family: "Pacifico", cursive;
-    font-weight: 700;
+    font-size: 28px;
     color: transparent;
     background: linear-gradient(90deg, #6dd5fa, #ffc371, #ff5f6d);
     -webkit-background-clip: text;
@@ -67,15 +68,17 @@ body {
 .search-input {
     width: 100%;
     padding: 12px 40px 12px 16px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     border-radius: 30px;
     outline: none;
     transition: 0.3s;
+    background-color: #f5f5f5;
 }
 
 .search-input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    border-color: rgba(91, 248, 235, 0.555);
+    box-shadow: 0 0 0 3px rgba(80, 255, 95, 0.034);
+    background-color: #fff;
 }
 
 .search-icon {
@@ -83,7 +86,7 @@ body {
     right: 14px;
     top: 50%;
     transform: translateY(-50%);
-    color: #888;
+    color: var(--text-light);
     pointer-events: none; /* アイコンをクリックしても入力欄にフォーカスされる */
 }
 
@@ -94,15 +97,26 @@ body {
     gap: 10px;
     margin-top: 15px;
     margin-bottom: 20px;
+    overflow-x: auto; /* 横スクロール可能に */
 }
-
+.filter-container::-webkit-scrollbar {
+    display: none;
+}
 .filter-btn {
-    border: 1px solid #333;
+    border: 1px solid var(--border-color);
     border-radius: 20px;
     padding: 8px 20px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
+    background-color: #fff;
+    color: var(--text-color);
+    white-space: nowrap; /* ボタン名を改行させない */
+    transition: all 0.2s ease-in-out;
+}
+.filter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 .filter-btn.food {
@@ -142,7 +156,7 @@ body {
 .post-image-container img {
     width: 100%;
     border-radius: 10px;
-    aspect-ratio: 1 / 1.2; /* 縦長の比率 */
+    aspect-ratio: 1 / 1; /* 縦長の比率 */
     object-fit: cover;
 }
 
@@ -163,6 +177,50 @@ body {
 .icon-heart {
     cursor: pointer;
     color: var(--text-dark);
+}
+.icon-animate {
+    /* "icon-pop" という名前のアニメーションを0.3秒かけて実行 */
+    animation: icon-pop 0.3s ease-in-out;
+}
+/* アクティブ時のアイコン色 */
+.icon-liked {
+    color: var(
+        --primary-color,
+        #ff7f50
+    ) !important; /* 新しいデザインのコーラル色、または好きな赤色 */
+}
+.icon-bookmarked {
+    color: var(
+        --secondary-color,
+        #48d1cc
+    ) !important; /* 新しいデザインのターコイズ色、または好きな黄色 */
+}
+.like-button i,
+.comment-toggle-button i,
+.bookmark-button i {
+    font-size: 26px; /* ← すべてのアイコンサイズをここで統一 */
+    color: var(--text-color);
+    transition: transform 0.2s ease;
+}
+
+/* アクティブ時のアイコン色 */
+.icon-liked {
+    color: var(--primary-color, #ff7f50) !important;
+}
+.icon-bookmarked {
+    color: var(--secondary-color, #48d1cc) !important;
+}
+/* アニメーションの動きを定義 */
+@keyframes icon-pop {
+    0% {
+        transform: scale(1); /* 開始時: 通常サイズ */
+    }
+    50% {
+        transform: scale(1.4); /* 中間: 1.4倍のサイズに拡大 */
+    }
+    100% {
+        transform: scale(1); /* 終了時: 通常サイズに戻る */
+    }
 }
 
 /* 投稿コンテンツ */
@@ -205,10 +263,15 @@ body {
 }
 
 .nav-item-add {
-    background-color: var(--text-dark);
+    background-color: rgb(70, 65, 65);
     border-radius: 50%;
-    width: 44px;
-    height: 44px;
+    width: 50px;  /* 少し大きくして存在感を出す */
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(78, 74, 72, 0.4);
+    transition: transform 0.2s ease;
 }
 
 button {
@@ -269,7 +332,7 @@ button {
 }
 
 .comment-item {
-    max-width: 70%;   /* 吹き出しっぽく横幅制限 */
+    max-width: 70%; /* 吹き出しっぽく横幅制限 */
     padding: 8px 12px;
     border-radius: 16px;
     font-size: 14px;

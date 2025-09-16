@@ -12,27 +12,32 @@
     </div>
 
     <div class="post-actions">
-        {{-- ★ ログインしているユーザーにだけ表示されるアクション --}}
+        {{-- ★ ログインユーザー用のアクション --}}
         @auth
-            <div class="actions-left" style="display: flex; align-items: center; gap: 50px;">
+            <div class="actions-left">
                 {{-- いいね --}}
                 <div class="like-section" id="like-section-{{ $post->id }}">
                     @if ($post->isLikedBy(Auth::user()))
-                        <form action="{{ route('posts.unlike', $post) }}" method="POST" class="like-form" data-post-id="{{ $post->id }}">
+                        <form action="{{ route('posts.unlike', $post) }}" method="POST" class="like-form"
+                            data-post-id="{{ $post->id }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="like-button"><i class="fas fa-heart" style="color: #f21818;"></i></button>
+                            {{-- ★★★ style="..."を削除し、「icon-liked」クラスを追加 ★★★ --}}
+                            <button type="submit" class="like-button"><i class="fas fa-heart icon-liked"></i></button>
                         </form>
                     @else
-                        <form action="{{ route('posts.like', $post) }}" method="POST" class="like-form" data-post-id="{{ $post->id }}">
+                        <form action="{{ route('posts.like', $post) }}" method="POST" class="like-form"
+                            data-post-id="{{ $post->id }}">
                             @csrf
+                            {{-- ★★★ style="..."を削除 ★★★ --}}
                             <button type="submit" class="like-button"><i class="far fa-heart"></i></button>
                         </form>
                     @endif
                 </div>
                 {{-- コメント --}}
+                {{-- ★★★ style="..."を削除 ★★★ --}}
                 <button type="button" class="comment-toggle-button" data-post-id="{{ $post->id }}">
-                    <i class="far fa-comment" style="font-size: 24px; color: #333;"></i>
+                    <i class="far fa-comment"></i>
                 </button>
             </div>
             {{-- ブックマーク --}}
@@ -41,12 +46,15 @@
                     <form action="{{ route('posts.unbookmark', $post) }}" method="POST" class="bookmark-form">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="bookmark-button"><i class="fas fa-bookmark" style="font-size: 28px; color: #ffc107;"></i></button>
+                        {{-- ★★★ style="..."を削除し、「icon-bookmarked」クラスを追加 ★★★ --}}
+                        <button type="submit" class="bookmark-button"><i
+                                class="fas fa-bookmark icon-bookmarked"></i></button>
                     </form>
                 @else
                     <form action="{{ route('posts.bookmark', $post) }}" method="POST" class="bookmark-form">
                         @csrf
-                        <button type="submit" class="bookmark-button"><i class="far fa-bookmark" style="font-size: 28px; color: #333;"></i></button>
+                        {{-- ★★★ style="..."を削除 ★★★ --}}
+                        <button type="submit" class="bookmark-button"><i class="far fa-bookmark"></i></button>
                     </form>
                 @endif
             </div>
@@ -57,16 +65,29 @@
             <div class="actions-left" style="display: flex; align-items: center; gap: 50px;">
                 {{-- ログインページへ誘導するアイコン --}}
                 <a href="{{ route('login') }}"><i class="far fa-heart" style="opacity: 0.5;"></i></a>
-                <a href="{{ route('login') }}"><i class="far fa-comment" style="font-size: 24px; color: #333; opacity: 0.5;"></i></a>
+                <a href="{{ route('login') }}"><i class="far fa-comment"
+                        style="font-size: 24px; color: #333; opacity: 0.5;"></i></a>
             </div>
-            <a href="{{ route('login') }}"><i class="far fa-bookmark" style="font-size: 28px; color: #333; opacity: 0.5;"></i></a>
+            <a href="{{ route('login') }}"><i class="far fa-bookmark"
+                    style="font-size: 28px; color: #333; opacity: 0.5;"></i></a>
         @endguest
     </div>
 
     {{-- コメント欄 (ログインユーザーのみ) --}}
     @auth
-        <div class="comments-container" id="comments-container-{{ $post->id }}" style="display: none; margin-top: 10px;">
-            {{-- ... コメントの表示と投稿フォーム ... --}}
+        <div class="comments-container" id="comments-container-{{ $post->id }}"
+            style="display: none; margin-top: 10px;">
+            <div class="comments-list">
+                {{-- コメントはJavaScriptで非同期に読み込まれるため、ここは空でOK --}}
+            </div>
+
+            {{-- 新しいコメントを投稿するためのフォーム --}}
+            <form action="{{ route('comments.store', $post) }}" method="POST" class="new-comment-form"
+                data-post-id="{{ $post->id }}">
+                @csrf
+                <input type="text" name="content" class="comment-input" placeholder="コメントを追加..." required>
+                <button type="submit" class="comment-submit-button">投稿</button>
+            </form>
         </div>
     @endauth
 

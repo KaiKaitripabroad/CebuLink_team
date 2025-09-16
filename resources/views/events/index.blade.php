@@ -12,7 +12,7 @@
     <section class="event-section">
         <div class="infrom">
             <h1 id="selected-date">ALL</h1>
-            <h1>Cebu イベント情報</h1>
+            <h1 class="main-title">Cebu イベント情報</h1>
         </div>
         <div class="event-list">
             @include('events.partials.event-list', ['events' => $events])
