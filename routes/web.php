@@ -34,6 +34,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home/search', [HomeController::class, 'search'])->name('home.search');
+
 Route::get('/events', [App\Http\Controllers\EventController::class, 'index'])->name('events.index');
 Route::get('/events/filter', [EventController::class, 'filterByDate'])->name('events.filterByDate');
 Route::middleware(['auth'])->group(function () {
@@ -42,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::get('/events/{id}/detail', [App\Http\Controllers\EventController::class, 'detail'])->name('events.detail');
 Route::get('/events/guest_detail', [App\Http\Controllers\EventController::class, 'detail_guest'])->name('events.detail_guest');
+
 Route::get('/posts', [App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
 Route::get('/posts/post_event', [App\Http\Controllers\PostController::class, 'post_event'])->name('posts.post_event');
 Route::get('/posts/create', [App\Http\Controllers\PostController::class, 'create'])->name('posts.create');
@@ -49,15 +51,10 @@ Route::post('/home', [App\Http\Controllers\PostController::class, 'store'])->nam
 Route::middleware('auth')->group(function () {
     Route::post('/events', [EventController::class, 'store'])->name('events.store');
 });
-
-Route::get('/posts/{id}/edit', [App\Http\Controllers\PostController::class, 'edit'])->name('posts.edit');
-Route::get('/posts/{id+}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
 // ...existing code...
 Route::get('/guest', [App\Http\Controllers\GuestController::class, 'index'])->name('guest.index');
 
 Route::get('/events/guest', [App\Http\Controllers\EventController::class, 'index'])->name('events.guest_index');
-
-Route::get('/mypage', [UserController::class, 'mypage'])->name('users.mypage');
 
 Route::patch('/profile/update', [UserController::class, 'update'])->name('profile.update');
 
@@ -69,10 +66,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/{post}/comments', [App\Http\Controllers\CommentController::class, 'index'])->name('comments.index');
     Route::post('/posts/{post}/comments', [App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
 });
-Route::middleware('auth')->group(function () {
-    // ... いいね機能やコメント機能のルート ...
+Route::middleware(['auth'])->group(function () {
+    Route::get('/mypage', [UserController::class, 'mypage'])->name('users.mypage');
+});
 
-    // 【追加】ブックマーク機能のルート
+Route::middleware('auth')->group(function () {
+    Route::get('/posts/manage', [PostController::class, 'manage'])->name('users.manage');
+    Route::patch('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
+    Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
+    Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
+    Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
     Route::post('/posts/{post}/bookmark', [BookmarkController::class, 'store'])->name('posts.bookmark');
     Route::delete('/posts/{post}/bookmark', [BookmarkController::class, 'destroy'])->name('posts.unbookmark');
 });
