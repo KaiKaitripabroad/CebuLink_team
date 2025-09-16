@@ -1,73 +1,139 @@
-/* カレンダー全体 */
+:root {
+    --sand-background: #f4e9d8; /* 砂浜の背景色 */
+    --ocean-blue-light: #a0d8ef; /* 明るい海の色 */
+    --ocean-blue-dark: #5e8b9e; /* 深い海の色 */
+    --text-dark-brown: #5d4037; /* テキスト用の濃い茶色 */
+    --card-background: #ffffff; /* カード背景 */
+    --shadow-color: rgba(93, 64, 55, 0.15); /* 影の色 */
+    --highlight-color: #fffaf0; /* ハイライト用のオフホワイト */
+}
+
+.main-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 0 15px;
+
+    /* 木目風の背景 */
+    background: repeating-linear-gradient(
+        90deg,
+        #deb887,
+        #deb887 10px,
+        #f5deb3 10px,
+        #f5deb3 20px
+    );
+    background-size: cover;
+
+    /* 少し光沢をつけて木板感を出す */
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* カレンダー全体（金属フレーム風） */
 .calendar-container {
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 30px auto;
     padding: 15px;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     max-width: 700px;
+
+    /* 金属っぽいグラデーション */
+    background: var(--card-background);
+    border-radius: 16px;
+    border: 2px solid #ccc;
+    background: linear-gradient(
+        135deg,
+        #f5f5f5 0%,
+        #d9d9d9 30%,
+        #eeeeee 50%,
+        #bfbfbf 80%,
+        #e0e0e0 100%
+    );
+
+    /* 金属に反射があるような効果 */
+    box-shadow:
+        inset 0 2px 4px rgba(255,255,255,0.6), /* 内側の光 */
+        inset 0 -2px 4px rgba(0,0,0,0.2),      /* 内側の影 */
+        0 4px 10px rgba(0,0,0,0.2);            /* 外側の影 */
 }
 
-/* ナビゲーションボタン */
+
+/* ナビゲーションボタン（穴風デザイン） */
 .nav-btn {
-    background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
-    border: none;
-    color: #000000;
-    font-size: 20px;
+    background: radial-gradient(circle at 30% 30%, #bbb, #888); /* 内側に暗さ */
+    border: 2px solid #666;
+    color: #444; /* 中の記号色を少し暗く */
+    font-size: 8px;
     cursor: pointer;
-    padding: 8px 14px;
+    padding: 10px;
     border-radius: 50%;
     transition: all 0.3s ease;
-}
-.nav-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+    /* 内側に凹みを作る影 */
+    box-shadow:
+        inset 2px 2px 4px rgba(0,0,0,0.5),   /* 左上からの影 */
+        inset -2px -2px 4px rgba(255,255,255,0.4); /* 右下の光 */
 }
 
-/* 日付リスト（横スクロール） */
+/* ホバーしたら押し込まれる感じ */
+.nav-btn:hover {
+    transform: scale(1.05);
+    box-shadow:
+        inset 3px 3px 6px rgba(0,0,0,0.6),
+        inset -2px -2px 4px rgba(255,255,255,0.3);
+}
+
 .date-list {
     display: flex;
     gap: 15px;
     overflow-x: auto;
     white-space: nowrap;
-    padding: 0 15px;
+    padding: 10px 15px; /* ちょっと余白追加で見やすく */
     scroll-behavior: smooth;
     flex: 1;
-}
 
+    background: linear-gradient(145deg, #d9d9d9, #b0b0b0); /* 深めのグレー */
+    border-radius: 10px;
+    box-shadow: inset 2px 2px 6px rgba(0,0,0,0.25),
+                inset -2px -2px 6px rgba(255,255,255,0.4);
+}
 /* 日付アイテム */
 .date-item {
     flex: 0 0 auto;
     padding: 10px 15px;
-    background: #f8f9fa;
-    border-radius: 5px;
+    background: linear-gradient(145deg, #f0f0f0, #d9d9d9); /* 金属っぽい明るいグレー */
+    border-radius: 6px;
     font-size: 16px;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
     min-width: 80px;
+    color: #333;
+    box-shadow:
+        inset 1px 1px 2px rgba(255,255,255,0.6),
+        inset -1px -1px 2px rgba(0,0,0,0.15);
 }
+
 .date-item:hover {
-    background:rgb(255, 255, 255);
-    color: #5f4949;
+    background: linear-gradient(145deg, #e0e0e0, #c4c4c4);
+    color: #000;
     transform: translateY(-3px);
 }
 
 /* 今日 or 選択中の日付 */
 .date-item.active {
-    background: white;
+    background: linear-gradient(145deg, #ffffff, #e5e5e5);
     color: #000000;
     font-weight: bold;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    border-bottom: 2px solid #000; /* 例: 黒い枠線 */
+    box-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.25),
+        inset 0 2px 4px rgba(255,255,255,0.6);
+    border: 1px solid #aaa; /* 枠線を金属っぽく */
 }
 .infrom {
-    display: flex; /* 横並び */
-    align-items: center; /* 縦方向を中央揃え */
-    gap: 20px; /* 要素間の余白 */
+    /* --- 元のスタイル（レイアウト用）--- */
+    display: flex;
+    align-items: center;
+    gap: 20px;
     justify-content: center;
 }
 
@@ -76,6 +142,13 @@
     font-size: 25px;
     font-weight: bold;
     margin: 0;
+    color: var(--text-dark-brown);
+}
+.main-title {
+    color: #d1c4b3; /* 背景の砂色に少し馴染ませる */
+    /* 上からの白い光と、下からの暗い影でへこみを表現 */
+    text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.7),
+        2px 2px 4px var(--shadow-color);
 }
 
 /* 画像ギャラリー */
@@ -92,6 +165,27 @@
     object-fit: cover;
     border-radius: 10px;
 }
+.event-section {
+    position: relative;
+    background-color: white;
+    box-shadow:  0px 4px 10px 0px rgba(0, 0, 0, 0.2);
+    padding: 25px;
+    margin-top: 35px; /* アイコンがはみ出すスペースを確保 */
+    margin-bottom: 20px;
+}
+
+/* ▼▼▼ 枠の上に貝殻アイコンを配置 ▼▼▼ */
+.event-section::before {
+    content: '📌'; /* 貝殻の絵文字 */
+    position: absolute;
+    top: -22px; /* 枠線の上に乗るようにマイナス値で調整 */
+    left: 50%;
+    transform: translateX(-50%); /* 中央に配置 */
+    font-size: 28px;
+    /* ページの背景色と同じ色で下の枠線を隠す */
+    padding: 0 15px; /* 左右に余白を作り、線を隠す幅を確保 */
+}
+
 
 .event-list {
     display: flex;
@@ -102,16 +196,18 @@
 
 .event-card {
     display: flex;
-    text-decoration: none;    /* 下線を消す */
-    color: inherit;           /* 親要素の文字色を継承 */
+    text-decoration: none;
+    color: inherit;
     align-items: center;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    padding: 10px;
+    background-color: var(--card-background);
+    border-radius: 15px;
+    padding: 15px;
     gap: 15px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: all 0.3s ease;
 }
 .event-card:hover {
-    background:white;
+    background: white;
     color: #000000;
     transform: translateY(-3px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
@@ -128,7 +224,6 @@
 .event-info h3 {
     margin: 0 0 5px;
     font-size: 23px;
-
 }
 
 .event-info p {
