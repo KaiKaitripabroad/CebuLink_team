@@ -7,11 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Storage;
-use Termwind\Components\Li;
 
 class UserController extends Controller
 {
-    // app/Http/Controllers/UserController.php
 
     public function mypage()
     {
@@ -22,7 +20,14 @@ class UserController extends Controller
         $profile = $user->profile()->firstOrNew([]); // [] を渡すのが一般的
 
         // これで、$profileがnullになることはありません
-        return view('users.mypage', compact('user', 'profile'));
+        // return view('users.mypage', compact('user', 'profile'));
+        // プロフィール（無ければ空で作る）
+        $profile = $user->profile()->firstOrNew([]);
+
+        // 自分の投稿
+        $posts = $user->posts()->latest()->get();
+
+        return view('users.mypage', compact('user', 'profile', 'posts'));
     }
 
     // 引数から User $user を削除
