@@ -12,6 +12,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\EventParticipantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,12 +36,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/home/search', [HomeController::class, 'search'])->name('home.search');
 
 Route::get('/events', [App\Http\Controllers\EventController::class, 'index'])->name('events.index');
-
+Route::get('/events/filter', [EventController::class, 'filterByDate'])->name('events.filterByDate');
 Route::middleware(['auth'])->group(function () {
     Route::get('/chat', [\Chatify\Http\Controllers\MessagesController::class, 'index'])
         ->name('chat');
 });
-Route::get('/events/detail', [App\Http\Controllers\EventController::class, 'detail'])->name('events.detail');
+Route::get('/events/{id}/detail', [App\Http\Controllers\EventController::class, 'detail'])->name('events.detail');
 Route::get('/events/guest_detail', [App\Http\Controllers\EventController::class, 'detail_guest'])->name('events.detail_guest');
 
 Route::get('/posts', [App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
@@ -64,7 +66,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/{post}/comments', [App\Http\Controllers\CommentController::class, 'index'])->name('comments.index');
     Route::post('/posts/{post}/comments', [App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
 });
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/mypage', [UserController::class, 'mypage'])->name('users.mypage');
 });
@@ -75,5 +76,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
     Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
     Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
-    // ← これ！
+    Route::post('/posts/{post}/bookmark', [BookmarkController::class, 'store'])->name('posts.bookmark');
+    Route::delete('/posts/{post}/bookmark', [BookmarkController::class, 'destroy'])->name('posts.unbookmark');
+});
+Route::get('/bookmarks', [BookmarkController::class, 'index'])->name('bookmark.index');
+Route::middleware('auth')->group(function () {
+    // ... 既存のルート ...
+
+    // 【追加】イベント参加・キャンセル用のルート
+    Route::post('/events/{event}/join', [EventParticipantController::class, 'join'])->name('events.join');
+    Route::delete('/events/{event}/cancel', [EventParticipantController::class, 'cancel'])->name('events.cancel');
 });

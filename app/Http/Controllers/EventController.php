@@ -23,11 +23,12 @@ class EventController extends Controller
         // events.blade.php に渡す
         return view('events.index', compact('events'));
     }
-    public function detail()
+    public function detail($id)
     {
-        return view('events.detail');
+        $event = Event::findOrFail($id);
+        return view('events.detail', compact('event'));
     }
-    public function detail_guest()
+    public function detail_guest($id)
     {
         return view('events.detail_guest');
     }
@@ -40,6 +41,8 @@ class EventController extends Controller
             'start_time' => 'required',
             'end_time'   => 'required',
             'img_url'        => 'nullable|image|max:5120', // ← img_url ではなく img に
+            'latitude'   => 'nullable|numeric',
+            'longitude'  => 'nullable|numeric',
         ]);
 
         $event = new Event();
@@ -49,6 +52,8 @@ class EventController extends Controller
         $event->start_at = $request->date . ' ' . $request->start_time . ':00';
         $event->end_at   = $request->date . ' ' . $request->end_time . ':00';
         $event->user_id = Auth::id();
+        $event->latitude = $request->latitude;
+        $event->longitude = $request->longitude;
 
         // ファイルがアップロードされていたらstorageに保存
         if ($request->hasFile('img_url')) {
@@ -59,5 +64,24 @@ class EventController extends Controller
 
 
         return redirect()->route('events.index')->with('success', 'イベントを作成しました！');
+    }
+    public function filterByDate(Request $request)
+    {
+        // 'date'というパラメータが送られてきた場合
+        if ($request->has('date')) {
+            $selectedDate = $request->input('date');
+
+            // 'start_date'カラム（実際のカラム名に合わせてください）の日付が一致するイベントを取得
+            $events = Event::whereDate('start_at', '<=', $selectedDate)
+                ->whereDate('end_at', '>=', $selectedDate)
+                ->latest()
+                ->get();
+        } else {
+            // 'date'パラメータがない場合（「ALL」表示用）は、全てのイベントを取得
+            $events = Event::latest()->get();
+        }
+
+        // イベントリストの部分だけをレンダリングするBladeビューを返す
+        return view('events.partials.event-list', compact('events'));
     }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +10,9 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <div class="welcome-container">
+    <div class="app-background-container">
         <div class="background-gradient"></div>
         <img class="palm-tree" src="images/palm-tree-silhouette.png"></img>
 
@@ -33,4 +35,5 @@
         </div>
     </div>
 </body>
+
 </html>

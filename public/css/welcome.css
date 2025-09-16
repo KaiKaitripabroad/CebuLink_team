@@ -5,14 +5,68 @@ body {
     line-height: 1.5;
 }
 
-/* 背景のグラデーション */
-.welcome-container {
-    position: relative;
+/* --- ページ全体の背景設定 --- */
+.app-background-container {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* ヤシの木がはみ出さないように */
+    padding: 2rem; /* 画面が小さい時に、画面端に余白を作る */
+    position: relative; /* 背景要素の基準点にする */
+    overflow: hidden;
+}
+
+
+/* 背景のグラデーション */
+.background-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        #f2c94c 0%, /* 黄色 */
+        #f2994a 50%, /* オレンジ */
+        #4fbbd9 100% /* 水色 */
+    );
+    z-index: 1; /* コンテンツの下に配置 */
+}
+
+/* ヤシの木のシルエット */
+.palm-tree {
+    position: absolute;
+    bottom: -5vh;
+    right: -10vw; /* 位置を調整 */
+    width: 80vw;
+    max-width: 800px; /* 大きくなりすぎないように */
+    height: 100vh;
+    background-image: url('/images/palm-tree-silhouette.png'); /* public/images/ からのパス */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    z-index: 2; /* グラデーションの上に配置 */
+    opacity: 0.7; /* 少し透明にして馴染ませる */
+}
+
+
+/* --- スマホ画面のコンテナのスタイルを修正 --- */
+.mobile-container {
+    width: 420px; /* 少しスリムに */
+    height: 880px; /* 高さを調整 */
+    background-color: var(--surface-color, #ffffff);
+    border: 1px solid var(--border-color, #eaeaea);
+    /* ★ よりくっきりした影に変更して、浮いているように見せる */
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* ★ z-indexを効かせるためにposition:relativeを追加 */
+    position: relative;
+    /* ★ 背景より手前に表示 */
+    z-index: 3;
+    /* ★ 角丸を追加すると、よりスマホらしくなります */
+    border-radius: 30px;
 }
 
 .background-gradient {

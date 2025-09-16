@@ -59,23 +59,25 @@
         <button type="button" class="search-btn" onclick="codeAddress()">検索</button>
         <div id="map"></div>
         <p>検索結果: <span id="result"></span></p>
+        <input type="hidden" name="latitude" id="latitude">
+        <input type="hidden" name="longitude" id="longitude">
 
-            {{-- タグ --}}
-            <div class="tag-section">
-                <label>tag:</label>
-                <div class="tags">
-                    <button class="tag yellow">food</button>
-                    <button class="tag green">shop</button>
-                    <button class="tag blue">event</button>
-                    <button class="tag orange">volunteer</button>
-                    <button class="tag pink">sightseeing</button>
-                    <button class="tag purple">others</button>
-                </div>
+        {{-- タグ --}}
+        <div class="tag-section">
+            <label>tag:</label>
+            <div class="tags">
+                <button class="tag yellow">food</button>
+                <button class="tag green">shop</button>
+                <button class="tag blue">event</button>
+                <button class="tag orange">volunteer</button>
+                <button class="tag pink">sightseeing</button>
+                <button class="tag purple">others</button>
             </div>
+        </div>
 
-            <button class="share-button">share</button>
+        <button class="share-button">share</button>
     </form>
-    <a href="{{route('posts.index')}}" class="back-button">戻る</a>
+    <a href="{{ route('posts.index') }}" class="back-button">戻る</a>
 
     <script>
         let map, geocoder, marker;
