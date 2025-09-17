@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
@@ -11,19 +12,22 @@ class PostController extends Controller
     public function index()
     {
         // 新しい投稿から順に取得
-        $posts = Post::with('user')->withCount('likes')->latest()->get();
+        $posts = Post::with('user','tags')->withCount('likes')->latest()->get();
         return view('posts.index', compact('posts'));
     }
     public function create()
     {
-        return view('posts.create');
+        // フォームに表示するため全タグを取得
+        $tags = Tag::orderBy('name')->get();
+        return view('posts.create', compact('tags'));
     }
-    function store(Request $request)
+    public function store(Request $request)
     {
         // バリデーション
         $request->validate([
-            'img_url' => 'nullable|image|max:5120', // 5MBまで
+            'img_url' => 'nullable|image|max:5120',
             'text'    => 'nullable|string|max:1000',
+            'tag'     => 'required|string|in:food,shop,event,volunteer,sightseeing,others',
         ]);
 
         // 画像もテキストも空ならエラー
@@ -39,10 +43,17 @@ class PostController extends Controller
         $post = new Post();
         $post->img_url = $path;
         $post->text    = $request->text;
-        $post->user_id = auth()->id();
+        $post->user_id = Auth::id();
         $post->save();
 
-        return redirect()->route('posts.store')->with('success', '投稿が作成されました');
+        if ($request->has('tag')) {
+            $tag = Tag::where('name', $request->tag)->first();
+            if ($tag) {
+                $post->tags()->attach($tag->id);
+            }
+        }
+
+        return redirect()->route('home')->with('success', '投稿が作成されました');
     }
     public function edit($id)
     {
@@ -50,7 +61,8 @@ class PostController extends Controller
     }
     public function show($id)
     {
-        return view('posts.show', ['id' => $id]);
+        $post = Post::with('tags')->findOrFail($id);
+        return view('posts.show', ['post' => $post]);
     }
     public function post_event()
     {

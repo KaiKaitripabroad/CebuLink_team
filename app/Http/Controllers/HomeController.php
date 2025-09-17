@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
         // 投稿を新しい順に取得
         $user = Auth::user();
-        $posts = Post::latest()->get();
+        $posts = Post::with(['user', 'comments', 'tags'])->latest()->get();
 
         return view('home', compact('posts', 'user'));
     }
@@ -42,8 +42,8 @@ class HomeController extends Controller
                         ->orWhere('name', 'like', "%{$keyword}%");
                 });
         })
-        ->latest() // 最新の投稿から順に
-        ->get();
+            ->latest() // 最新の投稿から順に
+            ->get();
 
         return view('home', compact('posts', 'keyword'));
     }

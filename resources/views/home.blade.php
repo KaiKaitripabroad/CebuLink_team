@@ -90,7 +90,18 @@
                 </form>
             </div>
             <div class="post-content">
-                <span class="tag">tag_placeholder</span>
+                @if ($post->tags->isNotEmpty())
+                    <div class="post-tags">
+                        @foreach ($post->tags as $tag)
+                            <span class="tag">{{ $tag->name }}</span>
+                        @endforeach
+                    </div>
+                @else
+                    <div class="post-tags">
+                        <span class="tag">タグなし</span>
+                    </div>
+                @endif
+
                 <p class="caption">{{ $post->text }}</p>
             </div>
         </article>

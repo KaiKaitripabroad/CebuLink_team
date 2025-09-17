@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/posts/{id}/edit', [App\Http\Controllers\PostController::class, 'edit'])->name('posts.edit');
-Route::get('/posts/{id+}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
+Route::get('/posts/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
 // ...existing code...
 Route::get('/guest', [App\Http\Controllers\GuestController::class, 'index'])->name('guest.index');
 
