@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -55,17 +56,74 @@ class PostController extends Controller
 
         return redirect()->route('home')->with('success', '投稿が作成されました');
     }
-    public function edit($id)
-    {
-        return view('posts.edit', ['id' => $id]);
-    }
-    public function show($id)
-    {
-        $post = Post::with('tags')->findOrFail($id);
-        return view('posts.show', ['post' => $post]);
-    }
     public function post_event()
     {
         return view('posts.post_event');
+    }
+
+    public function edit(Post $post)
+    {
+        // 自分の投稿以外をブロックしたいなら:
+        if ($post->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        return view('posts.edit', compact('post'));
+    }
+    public function update(Request $request, Post $post)
+    {
+
+
+        // 投稿が自分のものでない場合は403エラー
+        if ($post->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        // バリデーション
+        $request->validate([
+            'img_url' => 'nullable|image|max:5120', // 5MBまで
+            'text'    => 'nullable|string|max:1000',
+        ]);
+
+        // 画像もテキストも空ならエラー
+        if (!$request->hasFile('img_url') && empty($request->text)) {
+            return back()->withErrors(['input' => '画像またはテキストを入力してください'])->withInput();
+        }
+
+        if ($request->hasFile('img_url')) {
+            // 古い画像を削除
+            if ($post->img_url) {
+                Storage::disk('public')->delete($post->img_url);
+            }
+            $post->img_url = $request->file('img_url')->store('uploads', 'public');
+        }
+
+        $post->text = $request->text;
+        $post->save();
+
+        return redirect()->route('users.mypage')->with('success', '投稿が更新されました');
+    }
+    public function destroy(Post $post)
+    {
+        // 投稿が自分のものでない場合は403エラー
+        if ($post->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        // 画像がある場合は削除
+        if ($post->img_url) {
+            Storage::disk('public')->delete($post->img_url);
+        }
+
+        $post->delete();
+
+        return redirect()->route('posts.index')->with('success', '投稿が削除されました');
+    }
+
+
+    public function manage()
+    {
+        $posts = auth()->user()->posts()->latest()->get();
+        return view('users.manage', compact('posts'));
     }
 }

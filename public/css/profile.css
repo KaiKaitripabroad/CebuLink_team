@@ -1,4 +1,7 @@
+
+
 /* ハンバーガーメニュー */
+
 .menu-toggle {
     font-size: 28px;
     cursor: pointer;
@@ -14,7 +17,7 @@
     width: 200px;
     height: 100%;
     background: #ffffffe8;
-    box-shadow: -2px 0 6px rgba(0,0,0,0.2);
+    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.2);
     transition: right 0.3s ease;
     padding: 20px;
     z-index: 1000;
@@ -45,10 +48,11 @@
     align-items: center; /* 子要素を垂直方向の中央に揃える */
 }
 
+/* プロフィール周り */
 .profile-header {
     margin: 13px;
     align-items: center;
-    gap:45px;
+    gap: 45px;
 }
 
 .profile-container {
@@ -57,10 +61,16 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
 }
 
 .wakusen {
-    border: 1px solid #000000; /* 青色の線 */
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--card);
+    padding: 18px 16px;
+    box-shadow: 0 10px 30px rgba(49, 99, 252, 0.04);
     width: 100%;
     margin-bottom: 20px;
 }
@@ -73,18 +83,148 @@
 }
 
 .profile-info .username {
-    font-weight: bold;
-    font-size: 1.2em;
+    font-size: 18px;
+    font-weight: 800;
     margin: 0;
 }
 
 .profile-info .name {
-    color: #666;
+    color: var(--ink-2);
+    font-size: 14px;
     margin: 0;
 }
 
 .profile-bio p {
+    color: var(--ink-2);
+    line-height: 1.6;
     margin: 5px 0;
-    color: #555;
     font-size: 0.9em;
+}
+
+/* 投稿画像（16:9で統一） */
+.post-thumb.landscape {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    aspect-ratio: 16 / 9; /* 横長比率固定 */
+    overflow: hidden;
+    background: #000000;
+    margin: 0 auto;
+}
+
+.post-thumb.landscape img {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover; /* はみ出す部分をトリミング */
+    object-position: center;
+    display: block;
+    transition: transform 0.45s ease;
+}
+
+.post-thumb.landscape:hover img {
+    transform: scale(1.02);
+}
+
+/* 投稿一覧 */
+.posts-row {
+    width: 100%;
+    max-width: 720px; /* スマホなら全幅 */
+    margin: 0 auto;
+    padding: 8px 8px 100px;
+}
+
+.post-item {
+    width: 100%;
+}
+
+.post-item + .post-item {
+    margin-top: 10px;
+}
+
+/* 編集ページ用 */
+.edit-container {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    margin: 0 auto;
+    max-width: 720px;
+}
+
+.edit-container h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 8px;
+}
+
+/* プレビュー画像 */
+.edit-container .post-thumb {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* ラベル */
+.edit-container label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 6px;
+    text-align: left;
+}
+
+/* テキストエリア */
+.edit-container textarea {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+    resize: vertical;
+    margin-bottom: 16px;
+}
+
+/* ファイル選択 */
+.edit-container input[type="file"] {
+    display: block;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+/* ボタン */
+.edit-container .btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.edit-container .btn-primary {
+    background: #3178f5;
+    color: #fff;
+    border: none;
+}
+.edit-container .btn-primary:hover {
+    background: #1e63d1;
+}
+
+.edit-container .btn-secondary {
+    background: #eee;
+    color: #333;
+    margin-left: 10px;
+}
+.edit-container .btn-secondary:hover {
+    background: #ddd;
 }

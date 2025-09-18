@@ -105,6 +105,7 @@
                 <p class="caption">{{ $post->text }}</p>
             </div>
         </article>
+        @include('posts._post_card', ['post' => $post])
     @endforeach
 @endsection
 @section('scripts')

@@ -31,5 +31,13 @@ class Event extends Model
     {
         return $this->belongsTo(User::class, 'organizer_id');
     }
-
+    public function participants()
+    {
+        return $this->belongsToMany(User::class);
+    }
+    public function isJoinedBy($user)
+    {
+        if (!$user) return false;
+        return $this->participants()->where('user_id', $user->id)->exists();
+    }
 }
