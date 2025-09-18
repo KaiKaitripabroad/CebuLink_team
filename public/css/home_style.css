@@ -211,17 +211,20 @@ body {
 .like-button i,
 .comment-toggle-button i,
 .bookmark-button i {
-    font-size: 26px; /* ← すべてのアイコンサイズをここで統一 */
+    font-size: 26px;
+    /* 通常時のアイコン色 (var(--text-color) はソフトなダークグレー) */
     color: var(--text-color);
-    transition: transform 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
-/* アクティブ時のアイコン色 */
-.icon-liked i.icon-liked {
-    color: var(--primary-color, #ff7f50) !important;
+/* いいね済み（.icon-likedクラスが付いた場合）のアイコン色 */
+.like-button.icon-liked i {
+    color: var(--primary-color) !important; /* コーラル色 */
 }
-.icon-bookmarked {
-    color: var(--secondary-color, #48d1cc) !important;
+
+/* ブックマーク済み（.icon-bookmarkedクラスが付いた場合）のアイコン色 */
+.bookmark-button.icon-bookmarked i {
+    color: var(--secondary-color) !important; /* ターコイズ色 */
 }
 /* アニメーションの動きを定義 */
 @keyframes icon-pop {
