@@ -43,6 +43,9 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     // この投稿をブックマークしているユーザーとの関係
     public function bookmarkedByUsers()
     {

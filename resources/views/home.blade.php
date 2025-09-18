@@ -20,6 +20,91 @@
         <div class="dropdown-arrow"></div>
     </div>
     @foreach ($posts as $post)
+        <article class="post-card">
+            <div class="post-header">
+                <p class="post-author">
+                    {{ $post->user ? '@' . ($post->user->username ?? $post->user->name) : '@unknown' }}
+                </p>
+            </div>
+            <div class="post-image-container">
+                @if ($post->img_url)
+                    <img src="{{ asset('storage/' . $post->img_url) }}" alt="Post Image">
+                @endif
+            </div>
+            <div class="post-actions">
+                <div class="actions-left" style="display: flex; align-items: center; gap: 50px;">
+                    <div class="like-section" id="like-section-{{ $post->id }}">
+                        @if ($post->isLikedBy(Auth::user()))
+                            <form action="{{ route('posts.unlike', $post) }}" method="POST" class="like-form"
+                                data-post-id="{{ $post->id }}" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="like-button">
+                                    <i class="fas fa-heart" style="color: #f21818;"></i>
+                                </button>
+                            </form>
+                        @else
+                            <form action="{{ route('posts.like', $post) }}" method="POST" class="like-form"
+                                data-post-id="{{ $post->id }}" style="display: inline;">
+                                @csrf
+                                <button type="submit" class="like-button">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </form>
+                        @endif
+                    </div>
+
+                    {{-- いいね機能のすぐ隣に配置 --}}
+                    <button type="button" class="comment-toggle-button" data-post-id="{{ $post->id }}">
+                        <i class="far fa-comment" style="font-size: 24px; color: #333;"></i>
+                    </button>
+                </div>
+                <div class="actions-right">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="comments-container" id="comments-container-{{ $post->id }}"
+                style="display: none; margin-top: 10px;">
+
+                <div class="comments-list">
+                    @foreach ($post->comments as $comment)
+                        <div
+                            class="comment-item
+                @if ($comment->user_id === Auth::id()) my-comment @else other-comment @endif">
+                            <strong>{{ $comment->user->name }}</strong>
+                            <span>{{ $comment->content }}</span>
+                        </div>
+                    @endforeach
+                </div>
+
+                {{-- コメント投稿フォーム --}}
+                <form action="{{ route('comments.store', $post) }}" method="POST" class="new-comment-form"
+                    data-post-id="{{ $post->id }}">
+                    @csrf
+                    <input type="text" name="content" class="comment-input" placeholder="コメントを追加..." required>
+                    <button type="submit" class="comment-submit-button">投稿</button>
+                </form>
+            </div>
+            <div class="post-content">
+                @if ($post->tags->isNotEmpty())
+                    <div class="post-tags">
+                        @foreach ($post->tags as $tag)
+                            <span class="tag">{{ $tag->name }}</span>
+                        @endforeach
+                    </div>
+                @else
+                    <div class="post-tags">
+                        <span class="tag">タグなし</span>
+                    </div>
+                @endif
+
+                <p class="caption">{{ $post->text }}</p>
+            </div>
+        </article>
         @include('posts._post_card', ['post' => $post])
     @endforeach
 @endsection

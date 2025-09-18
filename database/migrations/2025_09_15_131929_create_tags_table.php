@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->string('tag')->nullable();
-            $table->string('img_url')->nullable();
-            $table->text('text')->nullable();
-            $table->unsignedBigInteger('user_id');
+            $table->string('name')->unique(); // タグ名 (例: music, event)
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('tags');
     }
 };

@@ -51,6 +51,9 @@ Route::post('/home', [App\Http\Controllers\PostController::class, 'store'])->nam
 Route::middleware('auth')->group(function () {
     Route::post('/events', [EventController::class, 'store'])->name('events.store');
 });
+
+Route::get('/posts/{id}/edit', [App\Http\Controllers\PostController::class, 'edit'])->name('posts.edit');
+Route::get('/posts/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
 // ...existing code...
 Route::get('/guest', [App\Http\Controllers\GuestController::class, 'index'])->name('guest.index');
 

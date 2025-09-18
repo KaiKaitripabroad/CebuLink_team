@@ -240,6 +240,25 @@ body {
     padding: 0 5px;
 }
 
+/* 🔽 ここに追加するのがベスト！ */
+.post-tags {
+    margin-bottom: 6px;
+}
+
+.post-tags .tag {
+    display: inline-block;
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 4px 8px;
+    margin: 2px;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+
+.tags {
+    margin-top: 8px;
+}
+
 .tag {
     display: inline-block;
     border: 1px solid var(--text-light);
