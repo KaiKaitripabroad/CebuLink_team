@@ -125,4 +125,11 @@ class PostController extends Controller
         $posts = auth()->user()->posts()->latest()->get();
         return view('users.manage', compact('posts'));
     }
+
+    public function show(Post $post)
+    {
+        $post->load('user', 'tags');
+        $post->loadCount('likes');
+        return view('', compact('post'));
+    }
 }
