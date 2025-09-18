@@ -4,6 +4,7 @@
     --secondary-color: #48d1cc; /* 穏やかなターコイズ */
     --background-color: #fdf8f5; /* 砂浜のような暖色系ベージュ */
     --surface-color: #ffffff; /* カードの背景色 */
+    --text-dark: #333333; /* ← この行を追加！ (濃いグレー) */
     --text-color: #4a4a4a; /* ソフトなダークグレー */
     --text-light: #9b9b9b; /* 明るいグレー */
     --border-color: #eaeaea;
@@ -188,7 +189,7 @@ body {
 .icon,
 .icon-heart {
     cursor: pointer;
-    color: var(--text-dark);
+    color: var(--primary-color, #ff7f50);
 }
 .icon-animate {
     /* "icon-pop" という名前のアニメーションを0.3秒かけて実行 */
@@ -216,7 +217,7 @@ body {
 }
 
 /* アクティブ時のアイコン色 */
-.icon-liked {
+.icon-liked i.icon-liked {
     color: var(--primary-color, #ff7f50) !important;
 }
 .icon-bookmarked {
