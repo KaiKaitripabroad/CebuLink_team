@@ -15,6 +15,11 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+    overflow: hidden; /* PCで見た時に背景のスクロールバーを非表示にする */
+}
+
 body {
     font-family: "Nunito", sans-serif;
     background-color: var(--background-color);
@@ -23,18 +28,25 @@ body {
     justify-content: center;
 }
 
-/* スマホ画面のコンテナ */
+.main-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 0 15px;
+    padding-bottom: 70px; /* ← この行を追加！フッターに隠れないための余白 */
+}
+
 .mobile-container {
     width: 480px;
-    height: 1040px; /* iPhone 12 Pro size */
+    height: 100%; /* ← '1040px' から '100%' に変更 */
     background-color: var(--surface-color);
     border: 1px solid var(--border-color);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* 中身がはみ出ないように */
+    overflow: hidden;
     position: relative;
 }
+
 
 /* ヘッダー */
 .header {
@@ -244,14 +256,18 @@ body {
     color: var(--text-dark);
 }
 
-/* フッターナビゲーション */
 .footer-nav {
+    position: absolute;   /* ← 親要素に固定 */
+    bottom: 0;
+    left: 0;
+    width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding: 10px 0;
     border-top: 1px solid var(--border-color);
     background-color: #ffffff;
+    z-index: 100; /* 前に出す */
 }
 
 .nav-item {
