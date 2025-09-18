@@ -1,25 +1,23 @@
 /* 全体レイアウト */
 main {
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* ★ 基本は横並び */
     align-items: center;
     justify-content: center;
     min-height: calc(100vh - 150px);
     padding: 5px;
     font-family: "Pacifico", cursive;
+    position: relative; /* 棒の位置の基準にするため追加 */
+    flex-wrap: wrap; /* 画面が狭い時に折り返すように */
 }
 
 /* 共通：木の矢印看板 */
 .post-button {
     position: relative;
     display: inline-block;
-
-    /* ★★★ サイズと比率を調整 ★★★ */
-    /* より大きく、横長の看板らしい比率に */
     padding: 35px 80px;
     margin: 30px;
     font-size: 28px;
-
     font-weight: bold;
     color: #fff;
     text-decoration: none;
@@ -27,58 +25,48 @@ main {
     text-transform: uppercase;
     letter-spacing: 2px;
     font-family: "Nunito", sans-serif;
-
-    /* ★★★ リアルな木目をCSSで再現 ★★★ */
-    /* ベースの色 */
     background-color: #8c5a2b;
-    /* 複数のグラデーションを重ねて木目を描画 */
-    background-image:
-        /* 1. 細かい木の繊維（暗い色）*/ repeating-linear-gradient(
+    background-image: repeating-linear-gradient(
             85deg,
             transparent,
             transparent 10px,
             rgba(66, 35, 8, 0.5) 10px,
             rgba(66, 35, 8, 0.5) 11px
         ),
-        /* 2. 大きな色の濃淡（明るい色）*/
-            repeating-linear-gradient(
-                175deg,
-                transparent,
-                transparent 20px,
-                rgba(240, 212, 163, 0.1) 20px,
-                rgba(240, 212, 163, 0.1) 24px
-            ),
-        /* 3. 全体のベースとなるグラデーション */
-            linear-gradient(135deg, #a96b2c, #8c5a2b);
-
-    border: 3px solid #5c3b1a; /* 枠線も少し太くする */
-
-    /* ★★★ 立体感をサイズに合わせて調整 ★★★ */
+        repeating-linear-gradient(
+            175deg,
+            transparent,
+            transparent 20px,
+            rgba(240, 212, 163, 0.1) 20px,
+            rgba(240, 212, 163, 0.1) 24px
+        ),
+        linear-gradient(135deg, #a96b2c, #8c5a2b);
+    border: 3px solid #5c3b1a;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4),
         inset 0 3px 5px rgba(255, 255, 255, 0.25),
         inset 0 -3px 5px rgba(0, 0, 0, 0.3);
-
-    /* 焼き印っぽい文字 */
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
     transition: transform 0.2s, box-shadow 0.2s;
+    z-index: 1; /* 棒より手前に来るように */
 }
 
 /* 棒（中央に1本） */
 .sign-post {
     position: absolute;
-    top: 30%;
-    bottom: 20%;
-    width: 40px; /* 棒の太さ */
+    top: 15%; /* 看板とのバランスを調整 */
+    bottom: 15%; /* 看板とのバランスを調整 */
+    left: 50%; /* 中央に配置 */
+    transform: translateX(-50%); /* 中央揃えの微調整 */
+    width: 40px;
     background: linear-gradient(180deg, #9c6b3d, #5c3b1a);
     border: 3px solid #3d2412;
     border-radius: 6px;
-    z-index: 0; /* 看板の後ろに置く */
+    z-index: 0; /* 看板の後ろに配置 */
 }
 
 /* 左矢印 */
 .post-button_normal {
     clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 20% 100%, 0% 50%);
-    z-index: 1; /* 棒の前に表示 */
 }
 
 /* 右矢印 */
@@ -88,7 +76,7 @@ main {
 
 /* ホバー時 */
 .post-button:hover {
-    transform: translateY(-5px); /* 少し大きく動かす */
+    transform: translateY(-5px);
     box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5),
         inset 0 3px 5px rgba(255, 255, 255, 0.3),
         inset 0 -3px 5px rgba(0, 0, 0, 0.3);
@@ -98,4 +86,50 @@ main {
 .post-button:active {
     transform: translateY(2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6), inset 0 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------------------------------------------- */
+/* ▼▼▼ レスポンシブ対応のための追加コード ▼▼▼ */
+/* ---------------------------------------------- */
+
+/* 画面幅が768px以下の場合に適用 */
+@media (max-width: 768px) {
+    main {
+        /* ボタンを縦に並べる */
+        flex-direction: column;
+        padding-top: 50px; /* 上部に余白を追加 */
+        padding-bottom: 50px;
+    }
+
+    /* 看板ボタンのサイズを調整 */
+    .post-button {
+        padding: 25px 60px; /* 少し小さく */
+        font-size: 20px; /* 文字も少し小さく */
+        margin: 25px; /* 上下のマージンを調整 */
+    }
+
+    /* 棒の高さを調整 */
+    .sign-post {
+        top: 23%;
+        bottom: 20%;
+        width: 30px; /* 棒も少し細く */
+    }
+
+    /* 矢印の形を維持しつつ、サイズ感を調整 */
+    .post-button_normal {
+        clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 15% 100%, 0% 50%);
+    }
+    .post-button_event {
+        clip-path: polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%);
+    }
+}
+
+/* 画面幅が480px以下の場合に適用（さらに小さいスマホ用） */
+@media (max-width: 480px) {
+    .post-button {
+        padding: 20px 40px; /* さらに小さく */
+        font-size: 16px; /* 文字もさらに小さく */
+        letter-spacing: 1px;
+    }
+
 }

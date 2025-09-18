@@ -13,7 +13,7 @@ class PostController extends Controller
     public function index()
     {
         // 新しい投稿から順に取得
-        $posts = Post::with('user','tags')->withCount('likes')->latest()->get();
+        $posts = Post::with('user', 'tags')->withCount('likes')->latest()->get();
         return view('posts.index', compact('posts'));
     }
     public function create()
@@ -47,12 +47,11 @@ class PostController extends Controller
         $post->user_id = Auth::id();
         $post->save();
 
-        if ($request->has('tag')) {
-            $tag = Tag::where('name', $request->tag)->first();
-            if ($tag) {
-                $post->tags()->attach($tag->id);
-            }
+        if ($request->has('tag_id')) {
+            // Postモデルのtags()リレーションを呼び出し、attach()で中間テーブルに記録
+            $post->tags()->attach($request->input('tag_id'));
         }
+
 
         return redirect()->route('home')->with('success', '投稿が作成されました');
     }

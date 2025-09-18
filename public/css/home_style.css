@@ -15,7 +15,8 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     height: 100%;
     overflow: hidden; /* PCで見た時に背景のスクロールバーを非表示にする */
 }
@@ -46,7 +47,6 @@ body {
     overflow: hidden;
     position: relative;
 }
-
 
 /* ヘッダー */
 .header {
@@ -234,6 +234,22 @@ body {
         transform: scale(1); /* 終了時: 通常サイズに戻る */
     }
 }
+@keyframes pop-animation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.4);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* アニメーションを再生するためのクラス */
+.icon-animate {
+    animation: pop-animation 0.3s ease-in-out;
+}
 
 /* 投稿コンテンツ */
 .post-content {
@@ -276,7 +292,7 @@ body {
 }
 
 .footer-nav {
-    position: absolute;   /* ← 親要素に固定 */
+    position: absolute; /* ← 親要素に固定 */
     bottom: 0;
     left: 0;
     width: 100%;
@@ -300,7 +316,7 @@ body {
 .nav-item-add {
     background-color: rgb(70, 65, 65);
     border-radius: 50%;
-    width: 50px;  /* 少し大きくして存在感を出す */
+    width: 50px; /* 少し大きくして存在感を出す */
     height: 50px;
     display: flex;
     align-items: center;

@@ -40,7 +40,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="like-button">
-                                    <i class="fas fa-heart" style="color: #f21818;"></i>
+                                    <i class="fas fa-heart" ></i>
                                 </button>
                             </form>
                         @else
@@ -59,13 +59,14 @@
                         <i class="far fa-comment" style="font-size: 24px; color: #333;"></i>
                     </button>
                 </div>
-                <div class="actions-right">
-                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-                    </svg>
-                </div>
+                <span id="bookmark-section-{{ $post->id }}">
+    <form action="{{ route('posts.unbookmark', $post) }}" method="POST" class="bookmark-form" data-post-id="{{ $post->id }}">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="bookmark-button">
+            <i class="fas fa-bookmark icon-bookmarked"></i> </button>
+    </form>
+</span>
             </div>
             <div class="comments-container" id="comments-container-{{ $post->id }}"
                 style="display: none; margin-top: 10px;">

@@ -80,7 +80,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
     Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
     Route::post('/posts/{post}/bookmark', [BookmarkController::class, 'store'])->name('posts.bookmark');
-    Route::delete('/posts/{post}/bookmark', [BookmarkController::class, 'destroy'])->name('posts.unbookmark');
+    Route::delete('/posts/{post}/unbookmark', [BookmarkController::class, 'destroy'])->name('posts.unbookmark');
 });
 Route::get('/bookmarks', [BookmarkController::class, 'index'])->name('bookmark.index');
 Route::middleware('auth')->group(function () {
