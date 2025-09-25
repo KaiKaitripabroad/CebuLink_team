@@ -143,8 +143,6 @@
                 });
             </script>
 
-
-            <!-- ★ここにAPIキーを入れる -->
             <script async
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwQGr3lEXxIF39xTbSl4exUYGIXMiErj0&callback=initMap"></script>
     </section>
