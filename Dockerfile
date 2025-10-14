@@ -9,23 +9,28 @@ RUN apt-get update && apt-get install -y \
 # 3️⃣ Composerをインストール
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# 4️⃣ アプリをコンテナ内にコピー
+# 4️⃣ 作業ディレクトリを設定
 WORKDIR /var/www/html
+
+# 5️⃣ アプリをコンテナにコピー
 COPY . .
 
-# 5️⃣ Laravel依存パッケージをインストール
+# 6️⃣ .envがなければコピー（.env.example を使用）
+RUN if [ ! -f .env ]; then cp .env.example .env; fi
+
+# 7️⃣ Laravel依存パッケージをインストール
 RUN composer install --no-dev --optimize-autoloader
 
-# 6️⃣ 権限を調整
+# 8️⃣ 権限を調整
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# 7️⃣ Laravelのキーを自動生成
-RUN php artisan key:generate
+# 9️⃣ Laravelキー生成（すでにAPP_KEYが.envにある場合はスキップ）
+RUN php artisan key:generate --ansi || echo "Key already exists or failed"
 
-# 8️⃣ ApacheのDocumentRootを「public」に変更
+# 🔟 ApacheのDocumentRootを「public」に変更
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
-# 9️⃣ Apacheをフォアグラウンドで起動
+# 1️⃣1️⃣ Apacheをフォアグラウンドで起動
 CMD ["apache2-foreground"]
