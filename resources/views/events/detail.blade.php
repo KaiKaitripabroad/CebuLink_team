@@ -143,7 +143,9 @@
                 });
             </script>
 
-            <script async
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwQGr3lEXxIF39xTbSl4exUYGIXMiErj0&callback=initMap"></script>
+            @if (config('services.google.maps_key'))
+                <script async
+                    src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.maps_key') }}&loading=async&callback=initMap"></script>
+            @endif
     </section>
 @endsection

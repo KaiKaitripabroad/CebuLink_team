@@ -1,5 +1,5 @@
 # 1️⃣ PHP + Apache をベースにする
-FROM php:8.2-apache
+FROM php:8.5.12-apache
 
 # 2️⃣ 必要なパッケージと拡張機能をインストール
 RUN apt-get update && apt-get install -y \
